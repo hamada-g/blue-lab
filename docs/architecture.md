@@ -59,3 +59,20 @@ The initial environment will include:
 - Phase 1 will use three virtual machines.
 - Storage was intentionally reduced to keep the initial lab lightweight and practical.
 - Resource assignments may be adjusted later if performance or storage issues arise.
+
+## Phase 1 Network Design Revision
+
+Blue Lab Phase 1 will use an Internal Hyper-V switch with NAT rather than an External switch. This change was made because the External switch bound to the host’s Wi-Fi adapter caused host connectivity instability.
+
+## Revised Network Approach
+- The host machine will remain connected to the home Wi-Fi network normally.
+- The lab virtual machines will connect to an Internal Hyper-V switch.
+- The host machine will provide NAT for the lab network so the virtual machines can reach the internet without directly binding to the physical Wi-Fi adapter.
+
+## Planned Lab Subnet
+- Lab Network: 10.10.10.0/24
+
+## Design Notes
+- The lab subnet is intentionally separate from the home network.
+- The host machine’s existing IP address and reserved port range on 192.168.5.98 must remain unchanged.
+- This design reduces the risk of disrupting host connectivity while still allowing the lab VMs to communicate and access the internet.
