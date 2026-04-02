@@ -25,3 +25,11 @@ Ubuntu Server 24.04 LTS
 - DHCP failed during install as expected because the Internal NAT design does not provide DHCP automatically.
 - The network interface is being configured manually with a static IP.
 - The system will be ready for post-install verification and network validation after installation completes.
+
+### Post-Install Verification
+- Successfully logged into the Ubuntu Server VM
+- Verified static IP configuration on the lab network
+- Verified external connectivity by IP
+- Verified DNS resolution
+- Ping to the host-side NAT gateway (10.10.10.1) returned 100% packet loss
+- Despite gateway ping failure, outbound internet connectivity and DNS resolution were functional
