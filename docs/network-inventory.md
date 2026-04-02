@@ -12,6 +12,7 @@ This document tracks the systems, devices, and network roles involved in Blue La
 | Windows Endpoint 1 | Planned Lab Endpoint | Lab | Windows | TBD | Will be used for Wazuh agent and event generation |
 | Linux Endpoint 1 | Planned Lab Endpoint | Lab | Linux | TBD | Will be used for Wazuh agent and log collection |
 | Monitoring Server | Planned Lab Server | Lab | Ubuntu Server | TBD | Intended host for central monitoring platform |
+| Host Internal NAT Adapter | Internal Lab Gateway | Lab | Hyper-V vEthernet | 10.10.10.1 | Gateway for Blue Lab NAT network |
 
 ## Environment Notes
 - The lab is being planned within a personal/home network.
