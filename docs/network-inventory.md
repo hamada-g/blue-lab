@@ -9,20 +9,23 @@ This document tracks the systems, devices, and network roles involved in Blue La
 |---|---|---|---|---|---|
 | Home Router | Router / Gateway | Home | eero OS | 192.168.4.1 | Main internet gateway |
 | Main PC / Laptop | Lab Host | Home | Windows 11 Pro | 192.168.5.98 | Candidate machine for virtualization and lab setup |
-| Windows Endpoint 1 | Planned Lab Endpoint | Lab | Windows | TBD | Will be used for Wazuh agent and event generation |
-| Linux Endpoint 1 | Planned Lab Endpoint | Lab | Linux | TBD | Will be used for Wazuh agent and log collection |
-| Monitoring Server | Planned Lab Server | Lab | Ubuntu Server | TBD | Intended host for central monitoring platform |
 | Host Internal NAT Adapter | Internal Lab Gateway | Lab | Hyper-V vEthernet | 10.10.10.1 | Gateway for Blue Lab NAT network |
+| Windows Endpoint 1 | Planned Lab Endpoint | Lab | Windows | 10.10.10.20 | Will be used for Wazuh agent and event generation |
+| Linux Endpoint 1 | Planned Lab Endpoint | Lab | Linux | 10.10.10.30 | Will be used for Wazuh agent and log collection |
+| Monitoring Server | Planned Lab Server | Lab | Ubuntu Server | 10.10.10.10 | Intended host for central monitoring platform |
 
 ## Environment Notes
-- The lab is being planned within a personal/home network.
-- The first phase will likely use virtual machines rather than separate physical hardware.
-- IP addresses and final host details will be added once the lab host is selected.
+- The lab is being built within a personal/home network.
+- The first phase uses virtual machines rather than separate physical hardware.
+- The original External switch design was revised because it disrupted host Wi-Fi connectivity.
+- Phase 1 now uses an Internal Hyper-V switch with NAT.
+- The planned lab subnet is 10.10.10.0/24 to avoid overlap with the host’s home network.
+- The host’s existing IP address and reserved port range on 192.168.5.98 must remain unchanged.
 
 ## Questions / Unknowns
-- What virtualization platform will be used?
-- Will the lab remain fully virtual for Phase 1?
-- How much RAM and storage can be dedicated to the lab?
+- Should the Linux endpoint use Ubuntu Desktop or Ubuntu Server?
+- What is the cleanest way to document static guest network configuration across all VMs?
+- What exact order should the remaining VMs be created in?
 
 ## Lab Host Specifications
 
@@ -32,12 +35,12 @@ This document tracks the systems, devices, and network roles involved in Blue La
 | Host Operating System | Windows 11 Pro |
 | CPU Model | Ryzen 9 9950X3D |
 | Number of CPU Cores / Threads | 16 Cores / 32 Threads |
-| RAM | 32 GB of DDR5 at 6400 MTs |
+| RAM | 32 GB DDR5 at 6400 MT/s |
 | Available Storage for Lab | 200 GB |
 | Virtualization Support Enabled in BIOS | Yes |
 | Preferred Virtualization Platform | Hyper-V |
 
 ## Notes
-- The lab host will be used to run the initial virtual machines for Phase 1.
+- The lab host is used to run the initial virtual machines for Phase 1.
 - Resource availability will determine how many systems can run comfortably at one time.
 - Hyper-V was enabled successfully and verified after host restart.
