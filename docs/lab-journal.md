@@ -11,22 +11,25 @@ Start the Blue Lab project with proper structure and documentation.
 - Created the core documentation files
 - Wrote the project charter
 - Created the initial network inventory document
+- Recorded the home router as the main internet gateway
+- Identified the main lab host as a Windows 11 Pro system on the home network
 
 ### Decisions Made
 - The project will start as a simple security monitoring lab
 - The first milestone will focus on one central monitoring platform and two endpoints
 - Documentation will be created from day one rather than added later
 - A dedicated network inventory document will be maintained before deployment begins
+- Phase 1 will likely begin fully virtualized on the main Windows host
 
 ### Questions / Unknowns
-- What machine will host the lab?
 - What virtualization platform will be used?
-- What IP/network layout will the lab use?
+- Will the lab remain fully virtual for Phase 1?
+- How much RAM and storage can be dedicated to the lab?
+- Is virtualization already enabled on the host system?
 - Which monitoring platform will be deployed first?
-- Which systems will remain personal/home systems versus dedicated lab systems?
 
 ### Problems Encountered
 - None so far
 
 ### Next Step
-Identify the machine and environment that will host the lab.
+Document the specifications and capabilities of the Windows lab host before choosing the virtualization platform.
