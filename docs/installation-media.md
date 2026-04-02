@@ -15,7 +15,7 @@ Ubuntu Server 24.04 LTS
 wazuh-server
 
 ### Local File Path
-TBD
+C:\Users\mgami\OneDrive\Desktop\Job Application Stuff\Blue-Lab Project\Installation Media
 
 ### Notes
 - Ubuntu Server 24.04 LTS was selected because it is a current long-term support release.
