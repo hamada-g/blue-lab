@@ -25,6 +25,10 @@ Start the Blue Lab project with proper structure and documentation.
 - Clarified that the lab should use a separate Windows VM as the monitored endpoint rather than preconfiguring the host machine as an agent target
 - Revised the Phase 1 storage allocation to better fit the available SSD capacity
 - Added the Phase 1 VM layout to the architecture documentation
+- Created the BlueLab-External virtual switch in Hyper-V
+- Bound the external switch to the Realtek 8922AE WiFi 7 PCI-E NIC
+- Verified that the management operating system is allowed to share the selected network adapter
+- Documented the initial Hyper-V networking setup
 
 ### Decisions Made
 - The project will start as a simple security monitoring lab
@@ -41,16 +45,17 @@ Start the Blue Lab project with proper structure and documentation.
 - The Windows host machine will not be configured as the first monitored endpoint; a dedicated Windows VM will be used instead
 - Wazuh agents will only be configured after the Wazuh server is deployed and the correct manager IP/hostname is available
 - Phase 1 storage allocations were reduced to keep the lab lightweight and practical on the available SSD space
-- Hyper-V is now the active virtualization platform for Phase 1
+- Hyper-V is the active virtualization platform for Phase 1
+- A single external virtual switch will be used initially to keep VM networking simple and reliable
 
 ### Questions / Unknowns
 - What internal IP range or naming scheme should be used for the VMs?
 - Should the Linux endpoint use Ubuntu Desktop or Ubuntu Server?
-- What is the cleanest way to document Hyper-V setup and switch configuration?
 - What exact order should the VMs be created in?
+- Which VM should be built first?
 
 ### Problems Encountered
 - A Wazuh agent installation/configuration window was opened before the Wazuh server existed, which clarified that agent deployment must occur after the manager is built
 
 ### Next Step
-Create the Hyper-V virtual networking setup and document how the lab VMs will communicate.
+Create the first virtual machine, beginning with the Wazuh server.
