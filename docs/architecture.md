@@ -1,9 +1,9 @@
 # Architecture
 
 ## Phase 1 Overview
-Blue Lab Phase 1 will be a fully virtualized security monitoring lab hosted on a Windows 11 Pro machine using Hyper-V.
+Blue Lab Phase 1 is a fully virtualized security monitoring lab hosted on a Windows 11 Pro machine using Hyper-V.
 
-The initial environment will include:
+The initial environment includes:
 - 1 Ubuntu Server virtual machine for the central monitoring platform
 - 1 Windows virtual machine to act as a monitored endpoint
 - 1 Linux virtual machine to act as a monitored endpoint
@@ -17,17 +17,17 @@ The initial environment will include:
 - Role: Runs all Phase 1 virtual machines
 
 ### 2. Monitoring Server
-- Planned OS: Ubuntu Server
+- Planned OS: Ubuntu Server 24.04 LTS
 - Role: Central monitoring platform
 - Purpose: Receive logs and security telemetry from monitored endpoints
 
 ### 3. Windows Endpoint
-- Planned OS: Windows
+- Planned OS: Windows 11
 - Role: Monitored endpoint
 - Purpose: Generate Windows event logs and endpoint activity for monitoring
 
 ### 4. Linux Endpoint
-- Planned OS: Linux
+- Planned OS: Ubuntu
 - Role: Monitored endpoint
 - Purpose: Generate Linux authentication, system, and security-relevant logs
 
@@ -61,18 +61,24 @@ The initial environment will include:
 - Resource assignments may be adjusted later if performance or storage issues arise.
 
 ## Phase 1 Network Design Revision
-
-Blue Lab Phase 1 will use an Internal Hyper-V switch with NAT rather than an External switch. This change was made because the External switch bound to the host’s Wi-Fi adapter caused host connectivity instability.
+Blue Lab Phase 1 uses an Internal Hyper-V switch with NAT rather than an External switch. This change was made because the External switch bound to the host’s Wi-Fi adapter caused host connectivity instability.
 
 ## Revised Network Approach
-- The host machine will remain connected to the home Wi-Fi network normally.
-- The lab virtual machines will connect to an Internal Hyper-V switch.
-- The host machine will provide NAT for the lab network so the virtual machines can reach the internet without directly binding to the physical Wi-Fi adapter.
+- The host machine remains connected to the home Wi-Fi network normally.
+- The lab virtual machines connect to an Internal Hyper-V switch.
+- The host machine provides NAT for the lab network so the virtual machines can reach the internet without directly binding to the physical Wi-Fi adapter.
 
 ## Planned Lab Subnet
 - Lab Network: 10.10.10.0/24
+
+## Static IP Plan
+- Host Internal NAT Gateway: 10.10.10.1
+- Wazuh Server: 10.10.10.10
+- Windows Endpoint: 10.10.10.20
+- Linux Endpoint: 10.10.10.30
 
 ## Design Notes
 - The lab subnet is intentionally separate from the home network.
 - The host machine’s existing IP address and reserved port range on 192.168.5.98 must remain unchanged.
 - This design reduces the risk of disrupting host connectivity while still allowing the lab VMs to communicate and access the internet.
+- Because the Internal NAT design does not provide DHCP automatically, guest IPs are configured manually.
