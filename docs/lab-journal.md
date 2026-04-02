@@ -56,7 +56,12 @@ Start the Blue Lab project with proper structure and documentation.
 - Verified that internet connectivity by IP and DNS resolution were working from the guest OS
 - Observed that ping to the host-side NAT gateway (10.10.10.1) failed despite working outbound connectivity
 - Updated the Ubuntu system and installed basic utilities successfully
-- Verified the server is ready for pre-install preparation
+- Verified hostname configuration and DNS resolution for package sources
+- Installed prerequisite packages needed for Wazuh setup
+- Added the Wazuh package repository
+- Attempted to install package `wazuh` and received “unable to locate package”
+- Confirmed that the correct package name for the server manager component is `wazuh-manager`
+- Installed `wazuh-manager` successfully
 
 ### Decisions Made
 - The project will start as a simple security monitoring lab.
@@ -83,12 +88,13 @@ Start the Blue Lab project with proper structure and documentation.
 - OpenSSH was selected during initial OS setup for future administration.
 - Because the Internal NAT design does not provide DHCP, guest IPs are configured manually.
 - The project can proceed even though the host-side NAT gateway does not respond to ping, because outbound internet access and DNS resolution from the guest are working.
+- The correct Wazuh manager package name for this install path is `wazuh-manager`, not `wazuh`.
 
 ### Questions / Unknowns
-- Why does the guest fail to ping the host-side NAT gateway despite working outbound connectivity?
+- Is the Wazuh manager service running cleanly after enable/start?
+- What ports are actively listening after the manager starts?
 - Should the Linux endpoint use Ubuntu Desktop or Ubuntu Server?
 - What exact order should the remaining VMs be created in?
-- What post-install checks should be run first on the Wazuh server after hostname and prerequisite verification?
 
 ### Problems Encountered
 - A Wazuh agent installation/configuration window was opened before the Wazuh server existed, which clarified that agent deployment must occur after the manager is built.
@@ -96,9 +102,7 @@ Start the Blue Lab project with proper structure and documentation.
 - The External Hyper-V switch caused host Wi-Fi connectivity loss, making it unsuitable for the Phase 1 design.
 - DHCP failed during Ubuntu installation on the Internal NAT network, which required manual static IP configuration.
 - The guest OS could not ping the host-side NAT gateway even though outbound internet connectivity and DNS resolution worked.
-- Attempted to install the package `wazuh` and received “unable to locate package”.
-- Confirmed from Wazuh documentation that the correct package name for the server manager component is `wazuh-manager`.
-- Installed the Wazuh manager component using the correct package name.
+- The initial package install attempt used `wazuh`, which was not available in the repository for this setup.
 
 ### Next Step
-Verify hostname and package-source DNS resolution, install final Wazuh prerequisites, and prepare the server for Wazuh repository setup.
+Enable and start the Wazuh manager service, verify that it is running, and confirm expected listener activity before moving on to endpoint VM creation.
