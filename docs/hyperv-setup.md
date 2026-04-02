@@ -2,32 +2,20 @@
 
 ## Phase 1 Virtual Switch
 
-### Switch Name
-BlueLab-External
+### Original External Switch
+- Switch Name: BlueLab-External
+- Switch Type: External
+- Host Adapter Used: Realtek 8922AE WiFi 7 PCI-E NIC
 
-### Switch Type
-External
-
-### Purpose
-This switch provides network connectivity for the Blue Lab virtual machines. It allows the lab VMs to communicate with each other and reach the internet through the host system’s active network adapter.
-
-### Host Adapter Used
-Realtek 8922AE WiFi 7 PCI-E NIC
-
-### Important Configuration
-- The management operating system is allowed to share the selected network adapter.
-- This switch will be used by the Wazuh server VM, the Windows endpoint VM, and the Linux endpoint VM.
-
-### Notes
-- This is the primary external switch for Blue Lab Phase 1.
-- The switch is bound to the host’s Realtek 8922AE WiFi 7 PCI-E NIC.
-- The network connection may briefly reset when the switch is created.
-- Phase 1 uses a simple external switch for ease of setup and connectivity.
+### Original Notes
+- This was the first switch design attempted for Blue Lab Phase 1.
+- The management operating system was allowed to share the selected network adapter.
+- This design caused host Wi-Fi connectivity issues and is no longer the preferred Phase 1 networking model.
 
 ## Design Revision
 - The original BlueLab-External switch design caused host connectivity issues on Wi-Fi.
-- The Phase 1 network design is being changed to use an Internal switch with NAT instead.
-- The External switch may be removed or retired after the Internal NAT design is implemented successfully.
+- The Phase 1 network design was changed to use an Internal switch with NAT instead.
+- The External switch may be removed or retired later after the Internal NAT design is fully validated.
 
 ## Internal NAT Setup
 
