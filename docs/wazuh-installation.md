@@ -16,13 +16,18 @@
 - Enabled the `wazuh-manager` service
 - Started the `wazuh-manager` service
 - Verified service status with `systemctl status wazuh-manager`
-- Checked for expected listener activity using `ss`
+- Confirmed listener activity on TCP 1514
+- Verified Wazuh-related processes are present
+- Reconfirmed server IP configuration and outbound connectivity after install
 
 ### Current Status
 - Wazuh manager is installed
 - Wazuh manager is enabled
 - Wazuh manager is running
+- TCP 1514 is listening
+- The server remains reachable to external resources via NAT
 
 ### Notes
 - The manager component is now installed and active on the Ubuntu server
 - Additional components such as the dashboard and indexer are separate and may be added later depending on the final lab design
+- The current lab state is sufficient to begin building monitored endpoint VMs
