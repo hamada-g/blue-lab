@@ -51,6 +51,10 @@ Start the Blue Lab project with proper structure and documentation.
 - Continued the Ubuntu installation under the revised Internal NAT design
 - Determined that DHCP would not work on the lab network because WinNAT does not provide DHCP
 - Configured the Ubuntu installer network settings manually using the planned static IP layout
+- Completed the Ubuntu installation and reached the login prompt
+- Logged into the wazuh-server VM
+- Verified that internet connectivity by IP and DNS resolution were working from the guest OS
+- Observed that ping to the host-side NAT gateway (10.10.10.1) failed despite working outbound connectivity
 
 ### Decisions Made
 - The project will start as a simple security monitoring lab.
@@ -76,18 +80,20 @@ Start the Blue Lab project with proper structure and documentation.
 - Ubuntu Server 24.04 LTS was selected as the base operating system for the Wazuh server.
 - OpenSSH was selected during initial OS setup for future administration.
 - Because the Internal NAT design does not provide DHCP, guest IPs are configured manually.
+- The project can proceed even though the host-side NAT gateway does not respond to ping, because outbound internet access and DNS resolution from the guest are working.
 
 ### Questions / Unknowns
+- Why does the guest fail to ping the host-side NAT gateway despite working outbound connectivity?
 - Should the Linux endpoint use Ubuntu Desktop or Ubuntu Server?
 - What exact order should the remaining VMs be created in?
-- What post-install checks should be run first on the Wazuh server?
-- At what point should the old BlueLab-External switch be removed?
+- What post-install checks should be run first on the Wazuh server after updates complete?
 
 ### Problems Encountered
 - A Wazuh agent installation/configuration window was opened before the Wazuh server existed, which clarified that agent deployment must occur after the manager is built.
 - The wazuh-server VM initially failed to boot from the Ubuntu ISO due to an incompatible Secure Boot template in Hyper-V.
 - The External Hyper-V switch caused host Wi-Fi connectivity loss, making it unsuitable for the Phase 1 design.
 - DHCP failed during Ubuntu installation on the Internal NAT network, which required manual static IP configuration.
+- The guest OS could not ping the host-side NAT gateway even though outbound internet connectivity and DNS resolution worked.
 
 ### Next Step
-Complete the Ubuntu installation, boot into the installed operating system, and verify the Wazuh server’s network configuration from داخل the guest OS.
+Update the Ubuntu server, install basic utilities, and prepare the system for Wazuh installation.
