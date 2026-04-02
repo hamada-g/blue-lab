@@ -46,3 +46,16 @@ The initial environment will include:
 - Phase 1 is intentionally limited in scope.
 - Advanced tools such as network sensors, forensic tools, and case management platforms are out of scope for now.
 - Public-facing documentation will be sanitized later to remove personal hostnames, IP addresses, and environment-specific details.
+
+## Phase 1 VM Layout
+
+| VM Name | Role | Planned OS | vCPU | RAM | Storage |
+|---|---|---|---|---|---|
+| wazuh-server | Central monitoring platform | Ubuntu Server | 4 | 8 GB | 50 GB |
+| win-endpoint-01 | Monitored Windows endpoint | Windows 11 | 4 | 8 GB | 40 GB |
+| linux-endpoint-01 | Monitored Linux endpoint | Ubuntu | 2 | 4 GB | 25 GB |
+
+## Resource Planning Notes
+- Phase 1 will use three virtual machines.
+- Storage was intentionally reduced to keep the initial lab lightweight and practical.
+- Resource assignments may be adjusted later if performance or storage issues arise.
