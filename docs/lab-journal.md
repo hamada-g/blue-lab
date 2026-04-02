@@ -58,4 +58,4 @@ Start the Blue Lab project with proper structure and documentation.
 - A Wazuh agent installation/configuration window was opened before the Wazuh server existed, which clarified that agent deployment must occur after the manager is built
 
 ### Next Step
-Create the first virtual machine, beginning with the Wazuh server.
+Download and document the Ubuntu Server installation media for the Wazuh server VM.
