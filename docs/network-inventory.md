@@ -23,3 +23,20 @@ This document tracks the systems, devices, and network roles involved in Blue La
 - What operating system is on the host machine?
 - What virtualization platform will be used?
 - Will the lab remain fully virtual for Phase 1?
+
+## Lab Host Specifications
+
+| Field | Value |
+|---|---|
+| Host Device Name | Mr-Yeet |
+| Host Operating System | Windows 11 Pro |
+| CPU Model | Ryzen 9 9950X3D |
+| Number of CPU Cores / Threads | 16 Cores / 32 Threads |
+| RAM | 32 GB of DDR5 at 6400 MTs |
+| Available Storage for Lab | 200 GB |
+| Virtualization Support Enabled in BIOS | Yes |
+| Preferred Virtualization Platform | VirtualBox |
+
+## Notes
+- The lab host will be used to run the initial virtual machines for Phase 1.
+- Resource availability will determine how many systems can run comfortably at one time.
