@@ -16,6 +16,11 @@ Start the Blue Lab project with proper structure and documentation.
 - Documented the lab host hardware specifications, available storage, and virtualization readiness
 - Chose Hyper-V as the preferred virtualization platform for Phase 1
 - Enabled Hyper-V through Windows Features, pending restart at the appropriate setup step
+- Created the initial Phase 1 architecture document
+- Reviewed Wazuh Windows agent deployment options
+- Selected PowerShell as the preferred Windows agent installation method for future deployment
+- Confirmed that Wazuh agent configuration cannot be completed until the Wazuh manager/server is deployed
+- Clarified that the lab should use a separate Windows VM as the monitored endpoint rather than preconfiguring the host machine as an agent target
 
 ### Decisions Made
 - The project will start as a simple security monitoring lab
@@ -27,15 +32,19 @@ Start the Blue Lab project with proper structure and documentation.
 - A sanitized public-facing version may be created later for portfolio use
 - Sensitive hostnames, IP addresses, and personal environment details will not be exposed publicly
 - Hyper-V was chosen over VirtualBox because the host runs Windows 11 Pro and supports native virtualization
+- The initial architecture will use one monitoring server, one Windows endpoint, and one Linux endpoint
+- PowerShell will be preferred over GUI for Windows Wazuh agent deployment because it is more repeatable, documentable, and automation-friendly
+- The Windows host machine will not be configured as the first monitored endpoint; a dedicated Windows VM will be used instead
+- Wazuh agents will only be configured after the Wazuh server is deployed and the correct manager IP/hostname is available
 
 ### Questions / Unknowns
 - How much RAM should be allocated to each VM?
-- Which monitoring platform will be deployed first?
 - What exact VM layout should be used for the first milestone?
 - When should the host machine be restarted to activate Hyper-V cleanly?
+- What exact Wazuh installation path should be used for the central server?
 
 ### Problems Encountered
-- None so far
+- A Wazuh agent installation/configuration window was opened before the Wazuh server existed, which clarified that agent deployment must occur after the manager is built
 
 ### Next Step
-Create and document the initial Phase 1 architecture before beginning installation and VM planning.
+Restart the host at the appropriate setup stage, confirm Hyper-V is active, and define the exact VM layout for Phase 1.
