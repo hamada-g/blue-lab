@@ -16,7 +16,13 @@
 - Enabled the `wazuh-manager` service
 - Started the `wazuh-manager` service
 - Verified service status with `systemctl status wazuh-manager`
+- Checked for expected listener activity using `ss`
+
+### Current Status
+- Wazuh manager is installed
+- Wazuh manager is enabled
+- Wazuh manager is running
 
 ### Notes
-- Current Wazuh documentation installs the manager as `wazuh-manager`, not `wazuh`
-- Additional components such as Filebeat, Wazuh indexer, and Wazuh dashboard are separate and will be addressed later
+- The manager component is now installed and active on the Ubuntu server
+- Additional components such as the dashboard and indexer are separate and may be added later depending on the final lab design
