@@ -96,6 +96,9 @@ Start the Blue Lab project with proper structure and documentation.
 - The External Hyper-V switch caused host Wi-Fi connectivity loss, making it unsuitable for the Phase 1 design.
 - DHCP failed during Ubuntu installation on the Internal NAT network, which required manual static IP configuration.
 - The guest OS could not ping the host-side NAT gateway even though outbound internet connectivity and DNS resolution worked.
+- Attempted to install the package `wazuh` and received “unable to locate package”.
+- Confirmed from Wazuh documentation that the correct package name for the server manager component is `wazuh-manager`.
+- Installed the Wazuh manager component using the correct package name.
 
 ### Next Step
 Verify hostname and package-source DNS resolution, install final Wazuh prerequisites, and prepare the server for Wazuh repository setup.
