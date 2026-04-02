@@ -41,6 +41,12 @@ Start the Blue Lab project with proper structure and documentation.
 - Detected that the External Hyper-V switch design was disrupting host Wi-Fi connectivity
 - Decided to redesign Phase 1 networking to use an Internal Hyper-V switch with NAT
 - Preserved the host’s existing network identity and port reservation requirements by planning a separate lab subnet
+- Created the BlueLab-Internal Hyper-V switch
+- Assigned 10.10.10.1/24 to the host-side vEthernet adapter for the internal lab switch
+- Created a NAT network named BlueLab-NAT for the 10.10.10.0/24 lab subnet
+- Confirmed that the internal NAT design is active and the host-side gateway IP is in a preferred state
+- Updated Hyper-V and network inventory documentation for the Internal NAT design
+- Reassigned the wazuh-server VM to the BlueLab-Internal switch
 
 ### Decisions Made
 - The project will start as a simple security monitoring lab
@@ -58,16 +64,17 @@ Start the Blue Lab project with proper structure and documentation.
 - Wazuh agents will only be configured after the Wazuh server is deployed and the correct manager IP/hostname is available
 - Phase 1 storage allocations were reduced to keep the lab lightweight and practical on the available SSD space
 - Hyper-V is the active virtualization platform for Phase 1
-- The original External switch design is being retired because it disrupted host Wi-Fi connectivity
-- Phase 1 networking will be redesigned to use an Internal Hyper-V switch with NAT
-- The lab subnet will be separated from the home network and should not use 192.168.5.0/24
-- The host’s existing IP address and reserved port range on 192.168.5.98 must remain unchanged
+- The original External switch design was retired because it disrupted host Wi-Fi connectivity
+- Phase 1 networking now uses an Internal Hyper-V switch with NAT
+- The lab subnet is 10.10.10.0/24
+- The host gateway IP on the lab subnet is 10.10.10.1
+- The host’s existing IP address and reserved port range on 192.168.5.98 remain unchanged
 
 ### Questions / Unknowns
-- What exact Internal switch name should be used?
-- What NAT configuration steps should be used on the Windows host?
-- What exact IP should the host use on the internal lab network?
 - Should the partially started Ubuntu installation be restarted cleanly after the network redesign?
+- What IP address should be assigned to the wazuh-server once it is attached to the internal lab switch?
+- Should the Linux endpoint use Ubuntu Desktop or Ubuntu Server?
+- What exact order should the remaining VMs be created in?
 
 ### Problems Encountered
 - A Wazuh agent installation/configuration window was opened before the Wazuh server existed, which clarified that agent deployment must occur after the manager is built
@@ -75,4 +82,4 @@ Start the Blue Lab project with proper structure and documentation.
 - The External Hyper-V switch caused host Wi-Fi connectivity loss, making it unsuitable for the Phase 1 design
 
 ### Next Step
-Document the Internal + NAT network redesign in the project files before making further Hyper-V network changes.
+Restart the wazuh-server VM on the BlueLab-Internal switch and continue the Ubuntu installation using the revised network design.
