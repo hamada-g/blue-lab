@@ -29,6 +29,11 @@ Start the Blue Lab project with proper structure and documentation.
 - Bound the external switch to the Realtek 8922AE WiFi 7 PCI-E NIC
 - Verified that the management operating system is allowed to share the selected network adapter
 - Documented the initial Hyper-V networking setup
+- Downloaded the Ubuntu Server 24.04 LTS ISO
+- Documented the installation media
+- Created the first VM: wazuh-server
+- Attached the Ubuntu Server ISO to the wazuh-server VM
+- Updated the VM build notes with the exact VM name, generation, memory, network, virtual disk path, and installation media path
 
 ### Decisions Made
 - The project will start as a simple security monitoring lab
@@ -47,15 +52,16 @@ Start the Blue Lab project with proper structure and documentation.
 - Phase 1 storage allocations were reduced to keep the lab lightweight and practical on the available SSD space
 - Hyper-V is the active virtualization platform for Phase 1
 - A single external virtual switch will be used initially to keep VM networking simple and reliable
+- The first VM to be built is the Wazuh server
 
 ### Questions / Unknowns
-- What internal IP range or naming scheme should be used for the VMs?
 - Should the Linux endpoint use Ubuntu Desktop or Ubuntu Server?
-- What exact order should the VMs be created in?
-- Which VM should be built first?
+- What exact order should the remaining VMs be created in?
+- Will Ubuntu boot cleanly with the current Hyper-V defaults?
+- What hostname and IP will the Wazuh server ultimately use inside the lab?
 
 ### Problems Encountered
 - A Wazuh agent installation/configuration window was opened before the Wazuh server existed, which clarified that agent deployment must occur after the manager is built
 
 ### Next Step
-Download and document the Ubuntu Server installation media for the Wazuh server VM.
+Start the wazuh-server VM and install Ubuntu Server 24.04 LTS.
