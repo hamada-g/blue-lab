@@ -23,3 +23,8 @@ Realtek 8922AE WiFi 7 PCI-E NIC
 - The switch is bound to the host’s Realtek 8922AE WiFi 7 PCI-E NIC.
 - The network connection may briefly reset when the switch is created.
 - Phase 1 uses a simple external switch for ease of setup and connectivity.
+
+## Design Revision
+- The original BlueLab-External switch design caused host connectivity issues on Wi-Fi.
+- The Phase 1 network design is being changed to use an Internal switch with NAT instead.
+- The External switch may be removed or retired after the Internal NAT design is implemented successfully.
