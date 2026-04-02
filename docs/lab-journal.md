@@ -62,6 +62,8 @@ Start the Blue Lab project with proper structure and documentation.
 - Attempted to install package `wazuh` and received “unable to locate package”
 - Confirmed that the correct package name for the server manager component is `wazuh-manager`
 - Installed `wazuh-manager` successfully
+- Verified that the Wazuh manager service is active and confirmed listener activity on TCP 1514
+- Confirmed the server retained correct IP addressing and outbound connectivity after manager installation
 
 ### Decisions Made
 - The project will start as a simple security monitoring lab.
