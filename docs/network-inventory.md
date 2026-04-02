@@ -19,10 +19,9 @@ This document tracks the systems, devices, and network roles involved in Blue La
 - IP addresses and final host details will be added once the lab host is selected.
 
 ## Questions / Unknowns
-- What machine will host the lab?
-- What operating system is on the host machine?
 - What virtualization platform will be used?
 - Will the lab remain fully virtual for Phase 1?
+- How much RAM and storage can be dedicated to the lab?
 
 ## Lab Host Specifications
 
