@@ -7,8 +7,8 @@ This document tracks the systems, devices, and network roles involved in Blue La
 
 | Device Name | Role | Environment | OS / Platform | IP Address | Notes |
 |---|---|---|---|---|---|
-| Home Router | Router / Gateway | Home | Unknown | TBD | Main internet gateway |
-| Main PC / Laptop | Potential Lab Host | Home | TBD | TBD | Candidate machine for virtualization and lab setup |
+| Home Router | Router / Gateway | Home | eero OS | 192.168.4.1 | Main internet gateway |
+| Main PC / Laptop | Lab Host | Home | Windows 11 Pro | 192.168.5.98 | Candidate machine for virtualization and lab setup |
 | Windows Endpoint 1 | Planned Lab Endpoint | Lab | Windows | TBD | Will be used for Wazuh agent and event generation |
 | Linux Endpoint 1 | Planned Lab Endpoint | Lab | Linux | TBD | Will be used for Wazuh agent and log collection |
 | Monitoring Server | Planned Lab Server | Lab | Ubuntu Server | TBD | Intended host for central monitoring platform |
