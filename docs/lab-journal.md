@@ -55,6 +55,8 @@ Start the Blue Lab project with proper structure and documentation.
 - Logged into the wazuh-server VM
 - Verified that internet connectivity by IP and DNS resolution were working from the guest OS
 - Observed that ping to the host-side NAT gateway (10.10.10.1) failed despite working outbound connectivity
+- Updated the Ubuntu system and installed basic utilities successfully
+- Verified the server is ready for pre-install preparation
 
 ### Decisions Made
 - The project will start as a simple security monitoring lab.
@@ -86,7 +88,7 @@ Start the Blue Lab project with proper structure and documentation.
 - Why does the guest fail to ping the host-side NAT gateway despite working outbound connectivity?
 - Should the Linux endpoint use Ubuntu Desktop or Ubuntu Server?
 - What exact order should the remaining VMs be created in?
-- What post-install checks should be run first on the Wazuh server after updates complete?
+- What post-install checks should be run first on the Wazuh server after hostname and prerequisite verification?
 
 ### Problems Encountered
 - A Wazuh agent installation/configuration window was opened before the Wazuh server existed, which clarified that agent deployment must occur after the manager is built.
@@ -96,4 +98,4 @@ Start the Blue Lab project with proper structure and documentation.
 - The guest OS could not ping the host-side NAT gateway even though outbound internet connectivity and DNS resolution worked.
 
 ### Next Step
-Update the Ubuntu server, install basic utilities, and prepare the system for Wazuh installation.
+Verify hostname and package-source DNS resolution, install final Wazuh prerequisites, and prepare the server for Wazuh repository setup.
