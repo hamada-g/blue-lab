@@ -10,17 +10,20 @@ Start the Blue Lab project with proper structure and documentation.
 - Added the initial folder structure
 - Created the core documentation files
 - Wrote the project charter
+- Created the initial network inventory document
 
 ### Decisions Made
 - The project will start as a simple security monitoring lab
 - The first milestone will focus on one central monitoring platform and two endpoints
 - Documentation will be created from day one rather than added later
+- A dedicated network inventory document will be maintained before deployment begins
 
 ### Questions / Unknowns
 - What machine will host the lab?
 - What virtualization platform will be used?
 - What IP/network layout will the lab use?
 - Which monitoring platform will be deployed first?
+- Which systems will remain personal/home systems versus dedicated lab systems?
 
 ### Problems Encountered
 - None so far
