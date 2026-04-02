@@ -34,8 +34,9 @@ This document tracks the systems, devices, and network roles involved in Blue La
 | RAM | 32 GB of DDR5 at 6400 MTs |
 | Available Storage for Lab | 200 GB |
 | Virtualization Support Enabled in BIOS | Yes |
-| Preferred Virtualization Platform | Hyper-V (planned) |
+| Preferred Virtualization Platform | Hyper-V |
 
 ## Notes
 - The lab host will be used to run the initial virtual machines for Phase 1.
 - Resource availability will determine how many systems can run comfortably at one time.
+- Hyper-V was enabled successfully and verified after host restart.
