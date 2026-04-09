@@ -108,3 +108,26 @@ Start the Blue Lab project with proper structure and documentation.
 
 ### Next Step
 Enable and start the Wazuh manager service, verify that it is running, and confirm expected listener activity before moving on to endpoint VM creation.
+
+## 2026-04-08
+
+### Objective
+Re-verify the health of the Wazuh server before moving on to endpoint VM creation.
+
+### Actions Taken
+- Logged back into the `wazuh-server` VM
+- Verified that the `wazuh-manager` service is active
+- Confirmed Wazuh-related processes are present
+- Reconfirmed IP addressing and routing
+- Reconfirmed outbound connectivity and DNS resolution
+- Reconfirmed listener activity on TCP 1514
+- Updated Wazuh installation documentation to reflect the current verified state
+
+### Decisions Made
+- The Wazuh server will be treated as stable enough to proceed to endpoint VM creation once all checks pass
+
+### Problems Encountered
+- None during the re-verification step
+
+### Next Step
+Create the Windows endpoint VM and prepare it for agent installation.
