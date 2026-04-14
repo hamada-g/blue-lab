@@ -10,7 +10,7 @@
 ### Installation
 - Initial attempt to install package `wazuh` failed because the package was not found
 - Confirmed that the correct package for the manager component is `wazuh-manager`
-- Installed `wazuh-manager` on Ubuntu Server 24.04 LTS
+- Installed `wazuh-manager` on Ubuntu Server 24.04.4 LTS
 
 ### Service Verification
 - Enabled the `wazuh-manager` service
@@ -28,6 +28,6 @@
 - The server remains reachable to external resources via NAT
 
 ### Notes
-- The manager component is now installed and active on the Ubuntu server
-- Additional components such as the dashboard and indexer are separate and may be added later depending on the final lab design
-- The current lab state is sufficient to begin building monitored endpoint VMs
+- The manager component is now installed and active on the Ubuntu server.
+- Additional components such as the dashboard and indexer are separate and may be added later depending on the final lab design.
+- The current lab state is sufficient to begin building monitored endpoint VMs.
