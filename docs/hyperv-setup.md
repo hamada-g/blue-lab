@@ -1,11 +1,15 @@
 # Hyper-V Setup
 
-## Phase 1 Virtual Switch
+## Original External Switch
 
-### Original External Switch
-- Switch Name: BlueLab-External
-- Switch Type: External
-- Host Adapter Used: Realtek 8922AE WiFi 7 PCI-E NIC
+### Switch Name
+BlueLab-External
+
+### Switch Type
+External
+
+### Host Adapter Used
+Realtek 8922AE WiFi 7 PCI-E NIC
 
 ### Original Notes
 - This was the first switch design attempted for Blue Lab Phase 1.
@@ -15,7 +19,7 @@
 ## Design Revision
 - The original BlueLab-External switch design caused host connectivity issues on Wi-Fi.
 - The Phase 1 network design was changed to use an Internal switch with NAT instead.
-- The External switch may be removed or retired later after the Internal NAT design is fully validated.
+- The External switch may be removed later after the Internal NAT design is fully validated.
 
 ## Internal NAT Setup
 
@@ -36,3 +40,4 @@
 - This Internal NAT design replaced the original External switch approach because the External switch caused host Wi-Fi connectivity issues.
 - The host remains on its normal Wi-Fi network while also providing NAT for the lab VMs.
 - The lab subnet is intentionally separate from the host’s home network and does not interfere with the host’s reserved port range on 192.168.5.98.
+- The current Phase 1 VMs should be attached to BlueLab-Internal.
