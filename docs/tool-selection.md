@@ -15,5 +15,9 @@ Wazuh was selected because it provides a practical entry point into security mon
 ## Why Other Tools Are Not Being Used Yet
 Additional tools such as Suricata, Zeek, Velociraptor, TheHive, and SOAR platforms may be added in later phases. They are intentionally out of scope for Phase 1 so the project can begin with one stable monitoring platform and a manageable architecture.
 
+## Supplemental Tools / Platforms
+- Hyper-V for core Phase 1 virtualization
+- VirtualBox for separate supplemental Kali Linux work outside the main Phase 1 lab design
+
 ## Phase 1 Principle
 Phase 1 prioritizes simplicity, stability, and documentation over tool quantity.
