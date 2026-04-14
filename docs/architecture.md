@@ -14,22 +14,28 @@ The initial environment includes:
 - Hostname: Mr-Yeet
 - Operating System: Windows 11 Pro
 - Virtualization Platform: Hyper-V
-- Role: Runs all Phase 1 virtual machines
+- Role: Runs all Phase 1 Hyper-V virtual machines
 
 ### 2. Monitoring Server
-- Planned OS: Ubuntu Server 24.04.4 LTS
+- OS: Ubuntu Server 24.04.4 LTS
+- VM Name: `wazuh-server`
 - Role: Central monitoring platform
 - Purpose: Receive logs and security telemetry from monitored endpoints
 
 ### 3. Windows Endpoint
 - Planned OS: Windows 11 English International 64-bit
+- VM Name: `win-endpoint-01`
 - Role: Monitored endpoint
 - Purpose: Generate Windows event logs and endpoint activity for monitoring
 
 ### 4. Linux Endpoint
-- Planned OS: Ubuntu Desktop
+- Planned OS: Ubuntu Desktop 24.04.4
+- VM Name: `linux-endpoint-01`
 - Role: Monitored endpoint
 - Purpose: Generate Linux authentication, system, and security-relevant logs
+
+## Additional Non-Phase-1 VM
+A separate Kali Linux virtual machine was also created in VirtualBox for supplemental learning and testing. It is not part of the primary Hyper-V Blue Lab Phase 1 architecture.
 
 ## Phase 1 Data Flow
 1. The Windows and Linux endpoints will generate logs and security-relevant activity.
