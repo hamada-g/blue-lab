@@ -86,17 +86,17 @@ Start the Blue Lab project with proper structure and documentation.
 - The lab subnet is 10.10.10.0/24.
 - The host gateway IP on the lab subnet is 10.10.10.1.
 - The host’s existing IP address and reserved port range on 192.168.5.98 remain unchanged.
-- Ubuntu Server 24.04 LTS was selected as the base operating system for the Wazuh server.
+- Ubuntu Server 24.04.4 LTS was selected as the base operating system for the Wazuh server.
 - OpenSSH was selected during initial OS setup for future administration.
 - Because the Internal NAT design does not provide DHCP, guest IPs are configured manually.
 - The project can proceed even though the host-side NAT gateway does not respond to ping, because outbound internet access and DNS resolution from the guest are working.
 - The correct Wazuh manager package name for this install path is `wazuh-manager`, not `wazuh`.
 
 ### Questions / Unknowns
-- Is the Wazuh manager service running cleanly after enable/start?
-- What ports are actively listening after the manager starts?
-- Should the Linux endpoint use Ubuntu Desktop or Ubuntu Server?
-- What exact order should the remaining VMs be created in?
+- At what point should the old BlueLab-External switch be removed?
+- What logging enhancements should be added to the Windows endpoint after base OS setup?
+- What is the cleanest sequence for installing and validating the Wazuh agent on Windows?
+- When should the Linux endpoint VM be built relative to Windows agent enrollment?
 
 ### Problems Encountered
 - A Wazuh agent installation/configuration window was opened before the Wazuh server existed, which clarified that agent deployment must occur after the manager is built.
@@ -107,7 +107,7 @@ Start the Blue Lab project with proper structure and documentation.
 - The initial package install attempt used `wazuh`, which was not available in the repository for this setup.
 
 ### Next Step
-Enable and start the Wazuh manager service, verify that it is running, and confirm expected listener activity before moving on to endpoint VM creation.
+Move on to endpoint VM creation after confirming the Wazuh server remains stable.
 
 ## 2026-04-08
 
@@ -131,3 +131,43 @@ Re-verify the health of the Wazuh server before moving on to endpoint VM creatio
 
 ### Next Step
 Create the Windows endpoint VM and prepare it for agent installation.
+
+## 2026-04-13
+
+### Objective
+Resume Phase 1 endpoint work and continue setup of the Windows endpoint VM.
+
+### Actions Taken
+- Confirmed the Wazuh server remains healthy enough to proceed
+- Standardized the installation media path for the project as `C:\Users\mgami\OneDrive\Desktop\Job Application Stuff\Blue-Lab Project\Installation Media`
+- Collected and organized current installation media, including:
+  - `kali-linux-2026.1-installer-amd64`
+  - `ubuntu-24.04.4-desktop-amd64`
+  - `ubuntu-24.04.4-live-server-amd64`
+  - `Win11_25H2_EnglishInternational_x64_v2`
+  - `wazuh-agent-4.14.4-1`
+- Created the Windows endpoint VM `win-endpoint-01`
+- Assigned the VM to the BlueLab-Internal switch
+- Configured the VM as Generation 2 with 8 GB RAM, 4 vCPU, and a 64 GB dynamically expanding VHDX
+- Attached the Windows 11 English International 64-bit ISO
+- Started Windows 11 setup in VMConnect
+- Reached the OOBE network requirement screen without internet access
+- Determined that the issue was expected because the VM is attached to the BlueLab-Internal NAT network without DHCP
+- Used `OOBE\BYPASSNRO` to continue setup using limited configuration
+- Built a separate Kali Linux VM in VirtualBox for supplemental learning and testing
+- Chose to use the Hyper-V Windows 11 lab guide by jwnfld3 as a supplemental reference for VM creation and setup flow, while adapting the steps to Blue Lab requirements
+
+### Decisions Made
+- The first monitored endpoint will be a dedicated Windows 11 VM named `win-endpoint-01`
+- The Windows endpoint computer name should match the VM name and remain `win-endpoint-01`
+- The Windows endpoint disk uses a 64 GB dynamically expanding VHDX to balance Windows 11 requirements with limited host storage
+- Static IP configuration will be applied after reaching the Windows desktop
+- Ubuntu Desktop will be the preferred Linux endpoint ISO already downloaded for later use
+- The separate Kali VM will be treated as supplemental lab infrastructure rather than part of the core Hyper-V Phase 1 architecture
+
+### Problems Encountered
+- Windows 11 OOBE required an internet connection before allowing account setup
+- The internal NAT lab network did not provide DHCP during setup, so the installer could not auto-configure networking
+
+### Next Step
+Finish Windows 11 setup, reach the desktop, and manually configure the static IP settings for `win-endpoint-01`.
