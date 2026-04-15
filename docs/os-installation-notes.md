@@ -56,13 +56,6 @@ Windows 11 English International 64-bit
 - DNS Servers: 1.1.1.1, 8.8.8.8
 - Storage: 64 GB dynamically expanding VHDX
 
-### Additional Endpoint Configuration
-- Installed the Wazuh Windows agent successfully
-- Verified that the `WazuhSvc` service was present and running
-- Confirmed agent enrollment to the Wazuh manager at `10.10.10.10`
-- Renamed the endpoint to `win-endpoint-01` to match the lab naming convention
-- Removed the stale initial agent record that had enrolled under the default Windows hostname
-
 ### Notes
 - Windows 11 installation completed successfully.
 - Windows OOBE required an internet connection before allowing account setup.
@@ -75,3 +68,10 @@ Windows 11 English International 64-bit
 - Verified static IP configuration
 - Verified outbound connectivity by IP
 - Verified DNS resolution
+
+### Additional Endpoint Configuration
+- Installed the Wazuh Windows agent successfully
+- Verified that the `WazuhSvc` service was present and running
+- Confirmed agent enrollment to the Wazuh manager at `10.10.10.10`
+- Renamed the endpoint to `win-endpoint-01` to match the lab naming convention
+- Removed the stale initial agent record that had enrolled under the default Windows hostname
