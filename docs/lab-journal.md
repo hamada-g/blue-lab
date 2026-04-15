@@ -185,13 +185,22 @@ Complete base Windows setup for the first monitored endpoint VM and configure ne
 - Configured a static IPv4 address on the BlueLab-Internal NAT network
 - Set the Windows endpoint IP to 10.10.10.20 with gateway 10.10.10.1 and public DNS servers
 - Verified local network configuration and tested outbound connectivity
+- Reviewed current VM memory usage on the host
+- Reduced the planned baseline memory for `wazuh-server` from 8 GB to 4 GB
+- Reduced the planned baseline memory for `win-endpoint-01` from 8 GB to 4 GB
+- Reduced the planned baseline memory for `linux-endpoint-01` from 4 GB to 3 GB
+- Updated architecture and VM build documentation to reflect the lighter resource plan
 
 ### Decisions Made
 - The Windows endpoint computer name matches the VM name for consistency in lab documentation and future agent enrollment
 - Static IP configuration is used on the Windows endpoint because the Internal NAT design does not provide DHCP
+- The Windows endpoint will use 4 GB RAM because it is serving as a monitored lab workstation rather than a performance-focused daily-use system
+- The Wazuh server will use 4 GB RAM because the current build is manager-only and does not yet include the full dashboard/indexer stack
+- The planned Linux endpoint will use 3 GB RAM to preserve host memory while remaining usable
 
 ### Problems Encountered
 - Windows 11 OOBE initially blocked setup due to the lack of internet connectivity on the internal NAT network
+- Host resource pressure made the original memory allocations unnecessarily heavy for the current lab stage
 
 ### Next Step
 Install the Wazuh Windows agent on `win-endpoint-01` and enroll it to the Wazuh manager at 10.10.10.10.
