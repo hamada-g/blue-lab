@@ -175,32 +175,25 @@ Finish Windows 11 setup, reach the desktop, and manually configure the static IP
 ## 2026-04-15
 
 ### Objective
-Complete base Windows setup for the first monitored endpoint VM and configure networking.
+Enroll the first Windows endpoint into Wazuh and standardize endpoint naming.
 
 ### Actions Taken
-- Continued Windows 11 setup on `win-endpoint-01`
-- Used `win-endpoint-01` as the device/computer name
-- Completed Windows 11 setup with a local account
-- Reached the Windows desktop successfully
-- Configured a static IPv4 address on the BlueLab-Internal NAT network
-- Set the Windows endpoint IP to 10.10.10.20 with gateway 10.10.10.1 and public DNS servers
-- Verified local network configuration and tested outbound connectivity
-- Reviewed current VM memory usage on the host
-- Reduced the planned baseline memory for `wazuh-server` from 8 GB to 4 GB
-- Reduced the planned baseline memory for `win-endpoint-01` from 8 GB to 4 GB
-- Reduced the planned baseline memory for `linux-endpoint-01` from 4 GB to 3 GB
-- Updated architecture and VM build documentation to reflect the lighter resource plan
+- Downloaded the Wazuh Windows agent inside `win-endpoint-01`
+- Installed the Wazuh Windows agent and configured it to connect to the Wazuh manager at 10.10.10.10
+- Verified that the `WazuhSvc` service was available and running
+- Confirmed Windows agent visibility from the Wazuh server using `agent_control -l`
+- Observed that the initial enrollment used the default Windows hostname
+- Renamed the endpoint to `win-endpoint-01`
+- Confirmed that a new agent entry appeared with the correct hostname
+- Removed the stale `DESKTOP-S5M0R8U` agent entry after verifying the new endpoint entry
 
 ### Decisions Made
-- The Windows endpoint computer name matches the VM name for consistency in lab documentation and future agent enrollment
-- Static IP configuration is used on the Windows endpoint because the Internal NAT design does not provide DHCP
-- The Windows endpoint will use 4 GB RAM because it is serving as a monitored lab workstation rather than a performance-focused daily-use system
-- The Wazuh server will use 4 GB RAM because the current build is manager-only and does not yet include the full dashboard/indexer stack
-- The planned Linux endpoint will use 3 GB RAM to preserve host memory while remaining usable
+- The Windows endpoint hostname and the Wazuh agent name should match the documented VM name for consistency
+- Agent cleanup should be performed immediately after a hostname-change re-enrollment to keep manager inventory clean
 
 ### Problems Encountered
-- Windows 11 OOBE initially blocked setup due to the lack of internet connectivity on the internal NAT network
-- Host resource pressure made the original memory allocations unnecessarily heavy for the current lab stage
+- The initial agent enrollment used the default Windows hostname rather than the intended lab endpoint name
+- The hostname change caused a second agent record to appear on the manager until the stale entry was removed
 
 ### Next Step
-Install the Wazuh Windows agent on `win-endpoint-01` and enroll it to the Wazuh manager at 10.10.10.10.
+Begin building and configuring the Linux endpoint VM and prepare it for Wazuh agent enrollment.
