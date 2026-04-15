@@ -171,3 +171,27 @@ Resume Phase 1 endpoint work and continue setup of the Windows endpoint VM.
 
 ### Next Step
 Finish Windows 11 setup, reach the desktop, and manually configure the static IP settings for `win-endpoint-01`.
+
+## 2026-04-15
+
+### Objective
+Complete base Windows setup for the first monitored endpoint VM and configure networking.
+
+### Actions Taken
+- Continued Windows 11 setup on `win-endpoint-01`
+- Used `win-endpoint-01` as the device/computer name
+- Completed Windows 11 setup with a local account
+- Reached the Windows desktop successfully
+- Configured a static IPv4 address on the BlueLab-Internal NAT network
+- Set the Windows endpoint IP to 10.10.10.20 with gateway 10.10.10.1 and public DNS servers
+- Verified local network configuration and tested outbound connectivity
+
+### Decisions Made
+- The Windows endpoint computer name matches the VM name for consistency in lab documentation and future agent enrollment
+- Static IP configuration is used on the Windows endpoint because the Internal NAT design does not provide DHCP
+
+### Problems Encountered
+- Windows 11 OOBE initially blocked setup due to the lack of internet connectivity on the internal NAT network
+
+### Next Step
+Install the Wazuh Windows agent on `win-endpoint-01` and enroll it to the Wazuh manager at 10.10.10.10.
