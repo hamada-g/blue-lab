@@ -48,16 +48,23 @@ Windows 11 English International 64-bit
 
 ### Installation Summary
 - VM Name: win-endpoint-01
-- Planned Computer Name: win-endpoint-01
+- Computer Name: win-endpoint-01
+- Username: blueadmin
 - Network Design During Install: BlueLab-Internal via Hyper-V Internal NAT design
-- Planned Static IP: 10.10.10.20/24
-- Planned Gateway: 10.10.10.1
-- Planned DNS Servers: 1.1.1.1, 8.8.8.8
+- Static IP: 10.10.10.20/24
+- Gateway: 10.10.10.1
+- DNS Servers: 1.1.1.1, 8.8.8.8
 - Storage: 64 GB dynamically expanding VHDX
 
 ### Notes
-- Windows 11 installation is currently in progress.
+- Windows 11 installation completed successfully.
 - Windows OOBE required an internet connection before allowing account setup.
 - Because the internal NAT design does not provide DHCP automatically, the installer could not auto-configure networking.
 - The OOBE network requirement was bypassed using `OOBE\BYPASSNRO` so setup could continue using limited configuration.
-- Static IP configuration will be applied after reaching the Windows desktop.
+- Static IP configuration was applied manually after reaching the Windows desktop.
+
+### Post-Install Verification
+- Reached the Windows desktop successfully
+- Verified static IP configuration
+- Verified outbound connectivity by IP
+- Verified DNS resolution
