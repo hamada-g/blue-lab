@@ -97,3 +97,4 @@ C:\Users\mgami\OneDrive\Desktop\Job Application Stuff\Blue-Lab Project\Installat
 
 ### Notes
 - This file is staged in advance to reduce dependency on future downloads during endpoint configuration.
+- Although the Wazuh MSI was staged on the host in the installation media directory, the actual Windows endpoint installation used a guest-side download because the Hyper-V VM did not have direct access to host files during setup.
