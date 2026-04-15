@@ -57,9 +57,9 @@ A separate Kali Linux virtual machine was also created in VirtualBox for supplem
 
 | VM Name | Role | Planned OS | vCPU | RAM | Storage |
 |---|---|---|---|---|---|
-| wazuh-server | Central monitoring platform | Ubuntu Server | 4 | 8 GB | 50 GB |
-| win-endpoint-01 | Monitored Windows endpoint | Windows 11 | 4 | 8 GB | 64 GB (dynamic VHDX) |
-| linux-endpoint-01 | Monitored Linux endpoint | Ubuntu Desktop | 2 | 4 GB | 25 GB |
+| wazuh-server | Central monitoring platform | Ubuntu Server | 4 | 4 GB | 50 GB |
+| win-endpoint-01 | Monitored Windows endpoint | Windows 11 | 4 | 4 GB | 64 GB (dynamic VHDX) |
+| linux-endpoint-01 | Monitored Linux endpoint | Ubuntu Desktop | 2 | 3 GB | 25 GB |
 
 ## Static IP Plan
 - Host Internal NAT Gateway: 10.10.10.1
