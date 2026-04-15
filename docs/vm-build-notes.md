@@ -8,7 +8,7 @@ This virtual machine hosts the central Wazuh monitoring platform for Blue Lab Ph
 ### Hyper-V Configuration
 - Name: wazuh-server
 - Generation: Generation 2
-- Memory: 8192 MB
+- Memory: 4096 MB
 - Network: BlueLab-Internal
 - Hard Disk: C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\wazuh-server.vhdx (VHDX, dynamically expanding)
 - Operating System: Ubuntu Server 24.04.4 LTS
@@ -27,7 +27,7 @@ This virtual machine serves as the monitored Windows endpoint for Blue Lab Phase
 ### Hyper-V Configuration
 - Name: win-endpoint-01
 - Generation: Generation 2
-- Memory: 8192 MB
+- Memory: 4096 MB
 - Processor: 4 vCPU
 - Network: BlueLab-Internal
 - Hard Disk: 64 GB VHDX (dynamically expanding)
@@ -58,7 +58,7 @@ This virtual machine will serve as the monitored Linux endpoint for Blue Lab Pha
 ### Planned Hyper-V Configuration
 - Name: linux-endpoint-01
 - Generation: Generation 2
-- Memory: 4096 MB
+- Memory: 3072 MB
 - Processor: 2 vCPU
 - Network: BlueLab-Internal
 - Hard Disk: 25 GB VHDX (dynamically expanding)
