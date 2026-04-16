@@ -3,18 +3,18 @@
 ## Phase 1 Overview
 Blue Lab Phase 1 is a fully virtualized security monitoring lab hosted on a Windows 11 Pro machine using Hyper-V.
 
-The initial environment includes:
+The active Phase 1 environment includes:
 - 1 Ubuntu Server virtual machine for the central monitoring platform
 - 1 Windows virtual machine to act as a monitored endpoint
 - 1 Linux virtual machine to act as a monitored endpoint
 
-## Components
+## Active Phase 1 Components
 
 ### 1. Lab Host
 - Hostname: `lab-host`
 - Operating System: Windows 11 Pro
 - Virtualization Platform: Hyper-V
-- Role: Runs all Phase 1 Hyper-V virtual machines
+- Role: Runs all active Blue Lab Phase 1 virtual machines
 
 ### 2. Monitoring Server
 - OS: Ubuntu Server 24.04.4 LTS
@@ -34,13 +34,17 @@ The initial environment includes:
 - Role: Monitored endpoint
 - Purpose: Generate Linux authentication, system, and security-relevant logs
 
-## Additional Non-Phase-1 VM
-A separate Kali Linux virtual machine was also created in VirtualBox for supplemental learning and testing. It is not part of the primary Hyper-V Blue Lab Phase 1 architecture.
+## Supplemental VM
+A separate Kali Linux virtual machine was also created in VirtualBox for supplemental learning and testing.
+
+### Notes
+- This Kali VM is not part of the primary Hyper-V Blue Lab Phase 1 architecture.
+- It may later support supplemental offensive-security testing or future red-lab planning.
 
 ## Phase 1 Data Flow
 1. The Windows and Linux endpoints generate logs and security-relevant activity.
 2. The endpoints forward telemetry to the central monitoring server.
-3. The monitoring server is used to review alerts, logs, and endpoint activity.
+3. The monitoring server is used to validate agent connectivity, review collected activity, and support future detection development.
 
 ## Phase 1 Goals
 - Stand up a functioning monitoring environment
@@ -48,10 +52,10 @@ A separate Kali Linux virtual machine was also created in VirtualBox for supplem
 - Confirm logs are being collected
 - Prepare for basic detections and alert review
 
-## Notes
+## Current Scope Notes
 - Phase 1 is intentionally limited in scope.
 - Advanced tools such as network sensors, forensic tools, case management platforms, and cloud integrations are out of scope for now.
-- Public-facing documentation has been sanitized to remove host-specific identifiers, internal file paths, and home-network details.
+- Public-facing documentation has been sanitized to remove host-specific identifiers, sensitive local paths, and non-essential environment details.
 
 ## Phase 1 VM Layout
 
@@ -70,8 +74,7 @@ A separate Kali Linux virtual machine was also created in VirtualBox for supplem
 ## Phase 1 Network Topology
 Blue Lab Phase 1 uses a Hyper-V Internal switch with host-provided NAT.
 
-### Current Network Design
-- Host Wi-Fi / home network remains separate from the lab subnet
+### Active Network Design
 - Hyper-V Internal switch: `BlueLab-Internal`
 - Internal gateway: `10.10.10.1`
 - Lab subnet: `10.10.10.0/24`
@@ -84,3 +87,20 @@ Blue Lab Phase 1 uses a Hyper-V Internal switch with host-provided NAT.
 ### Notes
 - Guest systems use static IP configuration because the lab network does not provide DHCP.
 - The current Phase 1 architecture is operational with one monitoring server and two enrolled endpoints.
+- The host-side NAT gateway may not respond to ICMP echo from guest systems even when outbound connectivity and DNS are functioning normally.
+
+## Current Wazuh Stack Status
+Blue Lab Phase 1 currently uses the Wazuh manager component on `wazuh-server`.
+
+### Notes
+- The manager is installed and active.
+- Dashboard and indexer components are not part of the current deployed baseline.
+- The present Phase 1 build is sufficient for agent enrollment, service validation, and monitored endpoint development.
+
+## Historical Context
+The project originally attempted a Hyper-V External switch design before moving to the current Internal switch plus NAT model.
+
+### Notes
+- The earlier External switch design caused host Wi-Fi instability.
+- That design is preserved only as historical troubleshooting context.
+- It is not part of the active architecture.
