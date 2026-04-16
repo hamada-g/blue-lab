@@ -32,9 +32,9 @@ This virtual machine serves as the monitored Windows endpoint for Blue Lab Phase
 - Network: BlueLab-Internal
 - Hard Disk: 64 GB VHDX (dynamically expanding)
 - Operating System: Windows 11 English International 64-bit
-- Planned Computer Name: win-endpoint-01
+- Computer Name: win-endpoint-01
 
-### Planned Network Configuration
+### Network Configuration
 - Static IP: 10.10.10.20
 - Subnet: 10.10.10.0/24
 - Gateway: 10.10.10.1
@@ -44,11 +44,14 @@ This virtual machine serves as the monitored Windows endpoint for Blue Lab Phase
 - Windows 11 setup reached the OOBE network requirement screen without internet access.
 - This was expected because the VM is attached to the BlueLab-Internal NAT network, which does not provide DHCP automatically.
 - The OOBE network requirement was bypassed using `OOBE\BYPASSNRO` so setup could continue with limited configuration.
+- Windows 11 setup completed successfully and the desktop was reached.
+- The Wazuh Windows agent was installed and enrolled to the Wazuh manager.
+- The endpoint was renamed to `win-endpoint-01` after the initial enrollment.
+- The stale initial agent entry using the default Windows hostname was removed from the manager.
 
 ### Notes
-- This VM will be used for Windows event generation, endpoint telemetry, and Wazuh agent enrollment.
+- This VM is now an active monitored Windows endpoint in Blue Lab Phase 1.
 - A community Hyper-V Windows 11 lab guide was used as a supplemental reference for VM creation flow, adapted to the Blue Lab environment.
-- As of 2026-04-13, Windows setup is still in progress and the desktop has not yet been fully reached.
 
 ## linux-endpoint-01
 
