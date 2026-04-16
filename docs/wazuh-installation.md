@@ -54,3 +54,24 @@
 ### Notes
 - Because the Hyper-V VM did not have direct host-file access for the staged MSI, the effective agent installation used a guest-side download path
 - The Windows endpoint is now the first monitored agent enrolled into the Blue Lab Wazuh manager
+
+## linux-endpoint-01 Agent Installation
+
+### Installation Summary
+- Installed prerequisite packages required for repo-based Wazuh deployment
+- Added the Wazuh repository and imported the signing key
+- Installed the Wazuh Linux agent using deployment variables
+- Configured the agent to use Wazuh manager IP `10.10.10.10`
+- Configured the agent name as `linux-endpoint-01`
+- Enabled and started the `wazuh-agent` service successfully
+
+### Enrollment Verification
+- Confirmed the Linux endpoint appeared on the Wazuh manager using `agent_control -l`
+
+### Current Status
+- `linux-endpoint-01` is enrolled to the Wazuh manager
+- The Linux agent is active
+
+### Notes
+- The initial manual package-download approach was abandoned in favor of the official repo/deployment-variable method from Wazuh documentation.
+- The Linux endpoint is the second monitored agent enrolled into the Blue Lab Wazuh manager.
