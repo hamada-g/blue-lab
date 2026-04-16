@@ -55,11 +55,11 @@ A separate Kali Linux virtual machine was also created in VirtualBox for supplem
 
 ## Phase 1 VM Layout
 
-| VM Name | Role | Planned OS | vCPU | RAM | Storage |
-|---|---|---|---|---|---|
-| wazuh-server | Central monitoring platform | Ubuntu Server | 4 | 4 GB | 50 GB |
-| win-endpoint-01 | Monitored Windows endpoint | Windows 11 | 4 | 4 GB | 64 GB (dynamic VHDX) |
-| linux-endpoint-01 | Monitored Linux endpoint | Ubuntu Desktop | 2 | 3 GB | 25 GB |
+| VM Name | Role | OS | vCPU | RAM | Storage | Status |
+|---|---|---|---|---|---|---|
+| wazuh-server | Central monitoring platform | Ubuntu Server 24.04.4 LTS | 4 | 4 GB | 50 GB | Active |
+| win-endpoint-01 | Monitored Windows endpoint | Windows 11 English International 64-bit | 4 | 4 GB | 64 GB dynamic VHDX | Active |
+| linux-endpoint-01 | Monitored Linux endpoint | Ubuntu Desktop 24.04.4 | 2 | 3 GB | 25 GB dynamic VHDX | Active |
 
 ## Static IP Plan
 - Host Internal NAT Gateway: 10.10.10.1
