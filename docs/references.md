@@ -7,7 +7,7 @@
 - Wazuh installation documentation — https://documentation.wazuh.com/current/installation-guide/index.html
 
 ## Supplemental Community References
-- jwnfld3, "hyper-v-windows11-lab" — used as a supplemental reference for Hyper-V Windows 11 VM creation flow and general install sequence
+- jwnfld3, "hyper-v-windows11-lab" — used as a supplemental reference for Hyper-V Windows 11 VM creation flow and general install sequence (https://github.com/jwnfld3/hyper-v-windows11-lab)
 
 ## Notes
 - Official vendor documentation remains the primary source of truth for the lab.
