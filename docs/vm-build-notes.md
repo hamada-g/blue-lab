@@ -40,25 +40,18 @@ This virtual machine serves as the monitored Windows endpoint for Blue Lab Phase
 - Gateway: 10.10.10.1
 - DNS: 1.1.1.1, 8.8.8.8
 
-### Installation Notes
-- Windows 11 setup reached the OOBE network requirement screen without internet access.
-- This was expected because the VM is attached to the BlueLab-Internal NAT network, which does not provide DHCP automatically.
-- The OOBE network requirement was bypassed using `OOBE\BYPASSNRO` so setup could continue with limited configuration.
+### Notes
 - Windows 11 setup completed successfully and the desktop was reached.
 - The Wazuh Windows agent was installed and enrolled to the Wazuh manager.
 - The endpoint was renamed to `win-endpoint-01` after the initial enrollment.
 - The stale initial agent entry using the default Windows hostname was removed from the manager.
 
-### Notes
-- This VM is now an active monitored Windows endpoint in Blue Lab Phase 1.
-- A community Hyper-V Windows 11 lab guide was used as a supplemental reference for VM creation flow, adapted to the Blue Lab environment.
-
 ## linux-endpoint-01
 
 ### VM Purpose
-This virtual machine will serve as the monitored Linux endpoint for Blue Lab Phase 1.
+This virtual machine serves as the monitored Linux endpoint for Blue Lab Phase 1.
 
-### Planned Hyper-V Configuration
+### Hyper-V Configuration
 - Name: linux-endpoint-01
 - Generation: Generation 2
 - Memory: 3072 MB
@@ -66,16 +59,19 @@ This virtual machine will serve as the monitored Linux endpoint for Blue Lab Pha
 - Network: BlueLab-Internal
 - Hard Disk: 25 GB VHDX (dynamically expanding)
 - Operating System: Ubuntu Desktop 24.04.4
+- Computer Name: linux-endpoint-01
 
-### Planned Network Configuration
+### Network Configuration
 - Static IP: 10.10.10.30
 - Subnet: 10.10.10.0/24
 - Gateway: 10.10.10.1
 - DNS: 1.1.1.1, 8.8.8.8
 
 ### Notes
-- This VM has not been created yet.
-- It will be used for Linux log generation, authentication events, and Wazuh agent enrollment after the Windows endpoint is online.
+- Ubuntu Desktop installation completed successfully.
+- The VM initially experienced a post-install keyboard/input issue at the login screen, which was resolved by rebooting the VM.
+- A network configuration mistake briefly assigned `1.1.1.1` as a local address instead of using it only as DNS; this was corrected.
+- The Linux Wazuh agent was installed and enrolled successfully to the Wazuh manager.
 
 ## kali-vbox
 
