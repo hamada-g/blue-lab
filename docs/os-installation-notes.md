@@ -6,22 +6,21 @@
 Ubuntu Server 24.04.4 LTS
 
 ### Installation Summary
-- VM Name: wazuh-server
-- Hostname: wazuh-server
-- Username: blueadmin
-- Network Design During Install: BlueLab-Internal via Hyper-V Internal NAT design
-- Static IP: 10.10.10.10/24
-- Gateway: 10.10.10.1
-- DNS Servers: 1.1.1.1, 8.8.8.8
+- VM Name: `wazuh-server`
+- Hostname: `wazuh-server`
+- Username: `blueadmin`
+- Network Design During Install: `BlueLab-Internal` via Hyper-V Internal NAT design
+- Static IP: `10.10.10.10/24`
+- Gateway: `10.10.10.1`
+- DNS Servers: `1.1.1.1`, `8.8.8.8`
 - Storage: Guided install using entire virtual disk
 - LVM: Not enabled
 - OpenSSH Server: Installed
 
 ### Notes
-- Ubuntu Server was installed successfully on the first VM in Blue Lab Phase 1.
+- Ubuntu Server was installed successfully as the first VM in Blue Lab Phase 1.
 - The VM initially failed to boot due to a Secure Boot template issue in Hyper-V.
 - The issue was resolved by changing the Secure Boot template to Microsoft UEFI Certificate Authority.
-- The original External switch design was replaced with an Internal NAT design before completing the install.
 - DHCP failed during install as expected because the Internal NAT design does not provide DHCP automatically.
 - The network interface was configured manually with a static IP.
 - The system is fully installed and operational.
@@ -32,14 +31,16 @@ Ubuntu Server 24.04.4 LTS
 - Verified default route configuration
 - Verified external connectivity by IP
 - Verified DNS resolution
-- Ping to the host-side NAT gateway (10.10.10.1) returned 100% packet loss
+- Observed that ping to the host-side NAT gateway (`10.10.10.1`) returned packet loss
 - Despite gateway ping failure, outbound internet connectivity and DNS resolution were functional
 
 ### Pre-Install Preparation
 - Verified hostname configuration
 - Verified DNS resolution for external package sources
-- Installed prerequisite packages: curl, apt-transport-https, unzip, lsb-release, gnupg
+- Installed prerequisite packages: `curl`, `apt-transport-https`, `unzip`, `lsb-release`, `gnupg`
 - Reconfirmed static IP and routing configuration
+
+---
 
 ## win-endpoint-01
 
@@ -47,13 +48,13 @@ Ubuntu Server 24.04.4 LTS
 Windows 11 English International 64-bit
 
 ### Installation Summary
-- VM Name: win-endpoint-01
-- Computer Name: win-endpoint-01
-- Username: blueadmin
-- Network Design During Install: BlueLab-Internal via Hyper-V Internal NAT design
-- Static IP: 10.10.10.20/24
-- Gateway: 10.10.10.1
-- DNS Servers: 1.1.1.1, 8.8.8.8
+- VM Name: `win-endpoint-01`
+- Computer Name: `win-endpoint-01`
+- Username: `blueadmin`
+- Network Design During Install: `BlueLab-Internal` via Hyper-V Internal NAT design
+- Static IP: `10.10.10.20/24`
+- Gateway: `10.10.10.1`
+- DNS Servers: `1.1.1.1`, `8.8.8.8`
 - Storage: 64 GB dynamically expanding VHDX
 
 ### Notes
@@ -76,18 +77,20 @@ Windows 11 English International 64-bit
 - Renamed the endpoint to `win-endpoint-01` to match the lab naming convention
 - Removed the stale initial agent record that had enrolled under the default Windows hostname
 
+---
+
 ## linux-endpoint-01
 
 ### Operating System
 Ubuntu Desktop 24.04.4
 
 ### Installation Summary
-- VM Name: linux-endpoint-01
-- Computer Name: linux-endpoint-01
-- Network Design During Install: BlueLab-Internal via Hyper-V Internal NAT design
-- Static IP: 10.10.10.30/24
-- Gateway: 10.10.10.1
-- DNS Servers: 1.1.1.1, 8.8.8.8
+- VM Name: `linux-endpoint-01`
+- Computer Name: `linux-endpoint-01`
+- Network Design During Install: `BlueLab-Internal` via Hyper-V Internal NAT design
+- Static IP: `10.10.10.30/24`
+- Gateway: `10.10.10.1`
+- DNS Servers: `1.1.1.1`, `8.8.8.8`
 - Storage: 25 GB dynamically expanding VHDX
 
 ### Notes
