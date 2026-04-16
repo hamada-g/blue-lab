@@ -10,7 +10,7 @@ This virtual machine hosts the central Wazuh monitoring platform for Blue Lab Ph
 - Generation: Generation 2
 - Memory: 4096 MB
 - Network: BlueLab-Internal
-- Hard Disk: C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\wazuh-server.vhdx (VHDX, dynamically expanding)
+- Hard Disk: <Hyper-V Virtual Disks>\wazuh-server.vhdx (VHDX, dynamically expanding)
 - Operating System: Ubuntu Server 24.04.4 LTS
 
 ### Notes
