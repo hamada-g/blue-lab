@@ -175,25 +175,25 @@ Finish Windows 11 setup, reach the desktop, and manually configure the static IP
 ## 2026-04-15
 
 ### Objective
-Enroll the first Windows endpoint into Wazuh and standardize endpoint naming.
+Complete Windows endpoint enrollment into Wazuh and standardize agent naming.
 
 ### Actions Taken
-- Downloaded the Wazuh Windows agent inside `win-endpoint-01`
-- Installed the Wazuh Windows agent and configured it to connect to the Wazuh manager at 10.10.10.10
-- Verified that the `WazuhSvc` service was available and running
+- Installed the Wazuh Windows agent inside `win-endpoint-01`
+- Configured the agent to connect to the Wazuh manager at 10.10.10.10
+- Verified that the `WazuhSvc` service existed and started successfully
 - Confirmed Windows agent visibility from the Wazuh server using `agent_control -l`
-- Observed that the initial enrollment used the default Windows hostname
-- Renamed the endpoint to `win-endpoint-01`
+- Observed that the first enrollment used the default Windows hostname
+- Renamed the Windows endpoint to `win-endpoint-01`
 - Confirmed that a new agent entry appeared with the correct hostname
 - Removed the stale `DESKTOP-S5M0R8U` agent entry after verifying the new endpoint entry
 
 ### Decisions Made
-- The Windows endpoint hostname and the Wazuh agent name should match the documented VM name for consistency
-- Agent cleanup should be performed immediately after a hostname-change re-enrollment to keep manager inventory clean
+- The Windows endpoint hostname and Wazuh agent name should match the documented VM name for consistency
+- Agent cleanup should be performed immediately after hostname-change re-enrollment to keep manager inventory clean
 
 ### Problems Encountered
 - The initial agent enrollment used the default Windows hostname rather than the intended lab endpoint name
 - The hostname change caused a second agent record to appear on the manager until the stale entry was removed
 
 ### Next Step
-Begin building and configuring the Linux endpoint VM and prepare it for Wazuh agent enrollment.
+Create and install the Linux endpoint VM, configure its static IP settings, and prepare it for Wazuh agent enrollment.
