@@ -21,11 +21,12 @@ This document tracks the systems, devices, and network roles involved in Blue La
 - The active lab design uses an Internal Hyper-V switch with NAT.
 - The lab subnet is 10.10.10.0/24 and is intentionally separate from the host’s normal network.
 - Guest systems use static IP configuration because the Internal NAT design does not provide DHCP.
+- The host-side NAT gateway may not respond to ICMP echo from guest systems even when outbound connectivity and DNS are functioning normally.
 - A separate Kali Linux VM exists in VirtualBox outside the main Hyper-V Phase 1 build.
 
 ## Questions / Unknowns
 - What logging enhancements should be added to the Windows endpoint after base OS setup?
-- What is the cleanest sequence for documenting and validating agent behavior across both monitored endpoints?
+- What endpoint telemetry improvements should be added before building the red-lab extension?
 - Should the Kali VM eventually be documented in a separate supplemental-lab section rather than the core Phase 1 docs?
 - How should the red-lab be segmented on top of the current blue-lab baseline?
 
@@ -38,7 +39,7 @@ This document tracks the systems, devices, and network roles involved in Blue La
 | CPU Model | Redacted desktop CPU |
 | Number of CPU Cores / Threads | Redacted |
 | RAM | 32 GB DDR5 |
-| Available Storage for Lab | ~219 GB free as of 2026-04-13 |
+| Available Storage for Lab | Variable; tracked periodically |
 | Virtualization Support Enabled in BIOS | Yes |
 | Preferred Virtualization Platform | Hyper-V |
 
