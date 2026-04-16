@@ -42,7 +42,7 @@
 ### Enrollment Verification
 - Confirmed the Windows endpoint appeared on the Wazuh manager using `agent_control -l`
 - Observed that the first enrollment used the default Windows hostname
-- Renamed the Windows endpoint to `win-endpoint-01`
+- Renamed the endpoint to `win-endpoint-01`
 - Confirmed a new agent entry appeared with the correct hostname
 - Removed the stale `DESKTOP-S5M0R8U` agent entry after confirming the new endpoint entry was present
 
