@@ -12,8 +12,8 @@ This document tracks the systems, devices, and network roles involved in Blue La
 | Host Internal NAT Adapter | Internal Lab Gateway | Lab | Hyper-V vEthernet | 10.10.10.1 | Gateway for Blue Lab NAT network |
 | Monitoring Server | Lab Server | Lab | Ubuntu Server | 10.10.10.10 | Wazuh manager host |
 | Windows Endpoint 1 | Endpoint VM | Lab | Windows 11 | 10.10.10.20 | Active monitored Windows endpoint for Wazuh agent enrollment and event generation |
-| Linux Endpoint 1 | Planned Endpoint VM | Lab | Ubuntu Desktop | 10.10.10.30 | Planned monitored Linux endpoint for Wazuh agent enrollment and log collection |
-| Kali VM | Supplemental Lab VM | Separate | Kali Linux (VirtualBox) | TBD | Separate VirtualBox VM used for supplemental learning/testing and not part of primary Hyper-V Phase 1 architecture |
+| Linux Endpoint 1 | Endpoint VM | Lab | Ubuntu Desktop 24.04.4 | 10.10.10.30 | Active monitored Linux endpoint for Wazuh agent enrollment and log collection |
+| Kali VM | Supplemental Lab VM | Separate | Kali Linux 2026.1 (VirtualBox) | TBD | Separate VirtualBox VM used for supplemental learning/testing and not part of the primary Hyper-V Phase 1 architecture |
 
 ## Environment Notes
 - The lab is being built within a personal/home network.
