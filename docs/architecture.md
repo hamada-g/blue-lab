@@ -67,19 +67,21 @@ A separate Kali Linux virtual machine was also created in VirtualBox for supplem
 - Windows Endpoint: 10.10.10.20
 - Linux Endpoint: 10.10.10.30
 
-## Phase 1 Network Design Revision
-Blue Lab Phase 1 uses an Internal Hyper-V switch with NAT rather than an External switch. This change was made because the External switch bound to the host’s Wi-Fi adapter caused host connectivity instability.
+## Phase 1 Network Topology
 
-## Revised Network Approach
-- The host machine remains connected to the home Wi-Fi network normally.
-- The lab virtual machines connect to an Internal Hyper-V switch.
-- The host machine provides NAT for the lab network so the virtual machines can reach the internet without directly binding to the physical Wi-Fi adapter.
+Blue Lab Phase 1 uses a Hyper-V Internal switch with host-provided NAT.
 
-## Planned Lab Subnet
-- Lab Network: 10.10.10.0/24
+### Current Network Design
+- Host Wi-Fi / home network remains separate from the lab subnet
+- Hyper-V Internal switch: `BlueLab-Internal`
+- Host internal gateway: `10.10.10.1`
+- Lab subnet: `10.10.10.0/24`
 
-## Design Notes
-- The lab subnet is intentionally separate from the home network.
-- The host machine’s existing IP address and reserved port range on 192.168.5.98 remain unchanged.
-- This design reduces the risk of disrupting host connectivity while still allowing the lab VMs to communicate and access the internet.
-- Because the Internal NAT design does not provide DHCP automatically, guest IPs are configured manually.
+### Active Core Systems
+- `wazuh-server` — 10.10.10.10
+- `win-endpoint-01` — 10.10.10.20
+- `linux-endpoint-01` — 10.10.10.30
+
+### Notes
+- Guest systems use static IP configuration because the lab network does not provide DHCP.
+- The current Phase 1 architecture is now fully operational with one monitoring server and two enrolled endpoints.
