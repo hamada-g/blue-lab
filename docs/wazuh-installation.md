@@ -52,8 +52,8 @@
 - The stale default-hostname entry has been removed
 
 ### Notes
-- Because the Hyper-V VM did not have direct host-file access for the staged MSI, the effective agent installation used a guest-side download path
-- The Windows endpoint is now the first monitored agent enrolled into the Blue Lab Wazuh manager
+- Because the Hyper-V VM did not have direct host-file access for the staged MSI, the effective agent installation used a guest-side download path.
+- The Windows endpoint is now the first monitored agent enrolled into the Blue Lab Wazuh manager.
 
 ## linux-endpoint-01 Agent Installation
 
