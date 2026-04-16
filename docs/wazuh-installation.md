@@ -2,6 +2,13 @@
 
 ## wazuh-server
 
+### Deployment Scope
+Blue Lab Phase 1 currently uses the **Wazuh manager** component on `wazuh-server`.
+
+### Notes
+- This Phase 1 baseline does not include the Wazuh dashboard or indexer.
+- The current deployment is sufficient for manager service validation, agent enrollment, and monitored endpoint development.
+
 ### Repository Setup
 - Imported the Wazuh GPG signing key
 - Added the Wazuh APT repository for the 4.x release line
@@ -28,9 +35,10 @@
 - The server remains reachable to external resources via NAT
 
 ### Notes
-- The manager component is now installed and active on the Ubuntu server.
-- Additional components such as the dashboard and indexer are separate and may be added later depending on the final lab design.
-- The current lab state is sufficient to begin building monitored endpoint VMs.
+- The manager component is installed and active on the Ubuntu server.
+- The present lab state is sufficient to support monitored endpoint enrollment in Phase 1.
+
+---
 
 ## win-endpoint-01 Agent Installation
 
@@ -44,7 +52,7 @@
 - Observed that the first enrollment used the default Windows hostname
 - Renamed the endpoint to `win-endpoint-01`
 - Confirmed a new agent entry appeared with the correct hostname
-- Removed the stale `DESKTOP-S5M0R8U` agent entry after confirming the new endpoint entry was present
+- Removed the stale default-hostname agent entry after confirming the corrected endpoint entry was present
 
 ### Current Status
 - `win-endpoint-01` is enrolled to the Wazuh manager
@@ -53,7 +61,9 @@
 
 ### Notes
 - Because the Hyper-V VM did not have direct host-file access for the staged MSI, the effective agent installation used a guest-side download path.
-- The Windows endpoint is now the first monitored agent enrolled into the Blue Lab Wazuh manager.
+- The Windows endpoint is the first monitored agent enrolled into the Blue Lab Wazuh manager.
+
+---
 
 ## linux-endpoint-01 Agent Installation
 
@@ -73,5 +83,5 @@
 - The Linux agent is active
 
 ### Notes
-- The initial manual package-download approach was abandoned in favor of the official repo/deployment-variable method from Wazuh documentation.
+- The initial manual package-download approach was abandoned in favor of the official repo-based deployment method from Wazuh documentation.
 - The Linux endpoint is the second monitored agent enrolled into the Blue Lab Wazuh manager.
