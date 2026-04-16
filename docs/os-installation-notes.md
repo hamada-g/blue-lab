@@ -75,3 +75,32 @@ Windows 11 English International 64-bit
 - Confirmed agent enrollment to the Wazuh manager at `10.10.10.10`
 - Renamed the endpoint to `win-endpoint-01` to match the lab naming convention
 - Removed the stale initial agent record that had enrolled under the default Windows hostname
+
+## linux-endpoint-01
+
+### Operating System
+Ubuntu Desktop 24.04.4
+
+### Installation Summary
+- VM Name: linux-endpoint-01
+- Computer Name: linux-endpoint-01
+- Network Design During Install: BlueLab-Internal via Hyper-V Internal NAT design
+- Static IP: 10.10.10.30/24
+- Gateway: 10.10.10.1
+- DNS Servers: 1.1.1.1, 8.8.8.8
+- Storage: 25 GB dynamically expanding VHDX
+
+### Notes
+- Ubuntu Desktop installation completed successfully.
+- The VM initially experienced a login-screen keyboard/input issue after install, which was resolved by powering the VM off and back on.
+- A network misconfiguration briefly assigned `1.1.1.1` as a local interface address instead of only a DNS server; this was corrected.
+- Although the host-side NAT gateway did not respond to ping, outbound internet connectivity and DNS resolution worked correctly.
+- The Linux Wazuh agent was installed and enrolled to the Wazuh manager at `10.10.10.10`.
+
+### Post-Install Verification
+- Verified static IP configuration
+- Verified default route
+- Verified outbound connectivity by IP
+- Verified DNS resolution
+- Verified `wazuh-agent` service status
+- Verified agent visibility on the Wazuh manager
