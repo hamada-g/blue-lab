@@ -8,10 +8,10 @@ The initial environment includes:
 - 1 Windows virtual machine to act as a monitored endpoint
 - 1 Linux virtual machine to act as a monitored endpoint
 
-## Planned Components
+## Components
 
 ### 1. Lab Host
-- Hostname: Mr-Yeet
+- Hostname: `lab-host`
 - Operating System: Windows 11 Pro
 - Virtualization Platform: Hyper-V
 - Role: Runs all Phase 1 Hyper-V virtual machines
@@ -23,13 +23,13 @@ The initial environment includes:
 - Purpose: Receive logs and security telemetry from monitored endpoints
 
 ### 3. Windows Endpoint
-- Planned OS: Windows 11 English International 64-bit
+- OS: Windows 11 English International 64-bit
 - VM Name: `win-endpoint-01`
 - Role: Monitored endpoint
 - Purpose: Generate Windows event logs and endpoint activity for monitoring
 
 ### 4. Linux Endpoint
-- Planned OS: Ubuntu Desktop 24.04.4
+- OS: Ubuntu Desktop 24.04.4
 - VM Name: `linux-endpoint-01`
 - Role: Monitored endpoint
 - Purpose: Generate Linux authentication, system, and security-relevant logs
@@ -38,9 +38,9 @@ The initial environment includes:
 A separate Kali Linux virtual machine was also created in VirtualBox for supplemental learning and testing. It is not part of the primary Hyper-V Blue Lab Phase 1 architecture.
 
 ## Phase 1 Data Flow
-1. The Windows and Linux endpoints will generate logs and security-relevant activity.
-2. The endpoints will forward telemetry to the central monitoring server.
-3. The monitoring server will be used to review alerts, logs, and endpoint activity.
+1. The Windows and Linux endpoints generate logs and security-relevant activity.
+2. The endpoints forward telemetry to the central monitoring server.
+3. The monitoring server is used to review alerts, logs, and endpoint activity.
 
 ## Phase 1 Goals
 - Stand up a functioning monitoring environment
@@ -51,7 +51,7 @@ A separate Kali Linux virtual machine was also created in VirtualBox for supplem
 ## Notes
 - Phase 1 is intentionally limited in scope.
 - Advanced tools such as network sensors, forensic tools, case management platforms, and cloud integrations are out of scope for now.
-- Public-facing documentation will be sanitized later to remove personal hostnames, IP addresses, and environment-specific details.
+- Public-facing documentation has been sanitized to remove host-specific identifiers, internal file paths, and home-network details.
 
 ## Phase 1 VM Layout
 
@@ -62,19 +62,18 @@ A separate Kali Linux virtual machine was also created in VirtualBox for supplem
 | linux-endpoint-01 | Monitored Linux endpoint | Ubuntu Desktop 24.04.4 | 2 | 3 GB | 25 GB dynamic VHDX | Active |
 
 ## Static IP Plan
-- Host Internal NAT Gateway: 10.10.10.1
+- Internal NAT Gateway: 10.10.10.1
 - Wazuh Server: 10.10.10.10
 - Windows Endpoint: 10.10.10.20
 - Linux Endpoint: 10.10.10.30
 
 ## Phase 1 Network Topology
-
 Blue Lab Phase 1 uses a Hyper-V Internal switch with host-provided NAT.
 
 ### Current Network Design
 - Host Wi-Fi / home network remains separate from the lab subnet
 - Hyper-V Internal switch: `BlueLab-Internal`
-- Host internal gateway: `10.10.10.1`
+- Internal gateway: `10.10.10.1`
 - Lab subnet: `10.10.10.0/24`
 
 ### Active Core Systems
@@ -84,4 +83,4 @@ Blue Lab Phase 1 uses a Hyper-V Internal switch with host-provided NAT.
 
 ### Notes
 - Guest systems use static IP configuration because the lab network does not provide DHCP.
-- The current Phase 1 architecture is now fully operational with one monitoring server and two enrolled endpoints.
+- The current Phase 1 architecture is operational with one monitoring server and two enrolled endpoints.
