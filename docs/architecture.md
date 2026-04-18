@@ -23,7 +23,7 @@ The active Phase 1 environment includes:
 - Purpose: Receive logs and security telemetry from monitored endpoints
 
 ### 3. Windows Endpoint
-- OS: Windows 11 English International 64-bit
+- OS: Windows 11 Home English International 64-bit
 - VM Name: `win-endpoint-01`
 - Role: Monitored endpoint
 - Purpose: Generate Windows event logs and endpoint activity for monitoring
@@ -62,7 +62,7 @@ A separate Kali Linux virtual machine was also created in VirtualBox for supplem
 | VM Name | Role | OS | vCPU | RAM | Storage | Status |
 |---|---|---|---|---|---|---|
 | wazuh-server | Central monitoring platform | Ubuntu Server 24.04.4 LTS | 4 | 4 GB | 50 GB | Active |
-| win-endpoint-01 | Monitored Windows endpoint | Windows 11 English International 64-bit | 4 | 4 GB | 64 GB dynamic VHDX | Active |
+| win-endpoint-01 | Monitored Windows endpoint | Windows 11 Home English International 64-bit | 4 | 4 GB | 64 GB dynamic VHDX | Active |
 | linux-endpoint-01 | Monitored Linux endpoint | Ubuntu Desktop 24.04.4 | 2 | 3 GB | 25 GB dynamic VHDX | Active |
 
 ## Static IP Plan
