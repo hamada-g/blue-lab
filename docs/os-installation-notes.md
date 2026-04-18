@@ -45,7 +45,7 @@ Ubuntu Server 24.04.4 LTS
 ## win-endpoint-01
 
 ### Operating System
-Windows 11 English International 64-bit
+Windows 11 Home English International 64-bit
 
 ### Installation Summary
 - VM Name: `win-endpoint-01`
@@ -63,6 +63,7 @@ Windows 11 English International 64-bit
 - Because the internal NAT design does not provide DHCP automatically, the installer could not auto-configure networking.
 - The OOBE network requirement was bypassed using `OOBE\BYPASSNRO` so setup could continue using limited configuration.
 - Static IP configuration was applied manually after reaching the Windows desktop.
+- Because the endpoint is running Windows 11 Home, Group Policy Editor was not available by default during later telemetry-baseline work.
 
 ### Post-Install Verification
 - Reached the Windows desktop successfully
@@ -76,6 +77,11 @@ Windows 11 English International 64-bit
 - Confirmed agent enrollment to the Wazuh manager at `10.10.10.10`
 - Renamed the endpoint to `win-endpoint-01` to match the lab naming convention
 - Removed the stale initial agent record that had enrolled under the default Windows hostname
+
+### Later Telemetry Validation Notes
+- During Phase 2A telemetry-baseline work, Group Policy Editor needed to be enabled manually because the endpoint was using Windows 11 Home.
+- Group Policy Editor was enabled through elevated Command Prompt using DISM package-addition commands before advanced audit policy configuration was revisited.
+- Effective process creation auditing was later validated using `auditpol`, which confirmed that Group Policy configuration alone was not sufficient until the active audit state was corrected.
 
 ---
 
