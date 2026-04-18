@@ -34,7 +34,7 @@ This virtual machine serves as the monitored Windows endpoint for Blue Lab Phase
 - Processor: 4 vCPU
 - Network: `BlueLab-Internal`
 - Hard Disk: 64 GB VHDX (dynamically expanding)
-- Operating System: Windows 11 English International 64-bit
+- Operating System: Windows 11 Home English International 64-bit
 - Computer Name: `win-endpoint-01`
 
 ### Network Configuration
@@ -48,6 +48,7 @@ This virtual machine serves as the monitored Windows endpoint for Blue Lab Phase
 - The Wazuh Windows agent was installed and enrolled to the Wazuh manager.
 - The endpoint was renamed to `win-endpoint-01` after the initial enrollment.
 - The stale initial agent entry using the default Windows hostname was removed from the manager.
+- Because the installed endpoint edition is Windows 11 Home, Group Policy Editor was not available by default during later telemetry-baseline work and had to be enabled manually before some audit-policy troubleshooting steps.
 
 ---
 
