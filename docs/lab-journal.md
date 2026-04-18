@@ -294,6 +294,11 @@ Begin Phase 2A telemetry validation on the Windows endpoint and improve manager-
 - Observed sample System event `7040` for a service startup type change, which mapped to a Wazuh rule
 - Observed sample Windows Update Client event `19` showing successful update installation
 - Determined that the initial `Get-Process | Select-Object -First 5` test did not produce a clean, isolated process-creation validation in the sampled output
+- Identified a mismatch between intended local audit policy and effective audit policy for process creation
+- Verified that `auditpol` still showed `Process Creation` as `No Auditing` even though the advanced audit setting had been configured in Local Group Policy
+- Corrected the effective process creation audit setting and revalidated Windows Security event ID `4688`
+- Confirmed manager-side archive output for `win-endpoint-01` now included Security event `4688` process-creation telemetry
+- Observed sample new process events including `taskhostw.exe`, `RuntimeBroker.exe`, and `sppsvc.exe`
 
 ### Decisions Made
 - Phase 2A should focus first on Windows telemetry validation before moving to Linux baseline work
@@ -301,6 +306,7 @@ Begin Phase 2A telemetry validation on the Windows endpoint and improve manager-
 - Manager inspection should be performed over SSH from the Windows host when practical
 - JSON event output should be filtered and formatted for readability rather than reviewed directly in long raw terminal streams
 - Explicit process-launch tests are preferable to `Get-Process` when validating process creation visibility
+- Effective audit policy must be verified with `auditpol`, not assumed from Group Policy configuration alone
 
 ### Problems Encountered
 - Raw `alerts.json` and `archives.json` output was difficult to read in the small Hyper-V console window
@@ -308,18 +314,22 @@ Begin Phase 2A telemetry validation on the Windows endpoint and improve manager-
 - Initial SSH access was attempted from the Windows endpoint instead of the Windows host, which was less useful for managing terminal space and workflow
 - Grep-based review of JSON output was technically functional but not comfortable for sustained manual inspection without additional formatting
 - The first process-related validation test did not cleanly isolate a process creation event in the sampled archive view, even though raw endpoint telemetry collection was confirmed
+- Intended policy settings in Local Group Policy did not initially match the effective `auditpol` state for process creation
 
 ### Important Commands Used
 - `Get-Service WazuhSvc`
 - `gpupdate /force`
+- `auditpol /get /subcategory:"Process Creation"`
+- `auditpol /set /subcategory:"Process Creation" /success:enable`
 - `sudo /var/ossec/bin/agent_control -l`
 - `sudo nano /var/ossec/etc/ossec.conf`
 - `sudo systemctl restart wazuh-manager`
 - `ssh blueadmin@10.10.10.10`
 - `sudo apt-get update && sudo apt-get install -y jq`
-- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'`
-- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | grep -a '"location":"EventChannel"' | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'`
+- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | tail -n 10 | jq '{timestamp, agent: .agent.name, location: .location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'
+- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | grep -a '"location":"EventChannel"' | tail -n 10 | jq '{timestamp, agent: .agent.name, location: .location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'
 - `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | jq 'select(.location=="EventChannel") | .full_log |= fromjson | select(.full_log.win.system.eventID=="4688" or (.full_log.win.system.providerName | test("PowerShell"))) | {timestamp, agent: .agent.name, eventID: .full_log.win.system.eventID, provider: .full_log.win.system.providerName, channel: .full_log.win.system.channel, message: .full_log.win.system.message}'`
+- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | jq 'select(.location=="EventChannel") | .full_log |= fromjson | select(.full_log.win.system.eventID=="4688") | {timestamp, agent: .agent.name, eventID: .full_log.win.system.eventID, provider: .full_log.win.system.providerName, channel: .full_log.win.system.channel, message: .full_log.win.system.message}'`
 
 ### Next Step
-Continue Phase 2A by generating more explicit Windows process and PowerShell test activity, then confirm whether those events are visible and distinguishable in archive review before moving on to Linux telemetry baseline work.
+Continue Phase 2A by validating PowerShell logging, failed logon visibility, local account management events, and scheduled task activity on `win-endpoint-01` before moving on to Linux telemetry baseline work.
