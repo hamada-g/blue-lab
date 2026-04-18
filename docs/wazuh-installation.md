@@ -7,7 +7,7 @@ Blue Lab Phase 1 currently uses the **Wazuh manager** component on `wazuh-server
 
 ### Notes
 - This Phase 1 baseline does not include the Wazuh dashboard or indexer.
-- The current deployment is sufficient for manager service validation, agent enrollment, and monitored endpoint development.
+- The current deployment is sufficient for manager service validation, agent enrollment, telemetry verification, and monitored endpoint development.
 
 ### Repository Setup
 - Imported the Wazuh GPG signing key
@@ -37,6 +37,27 @@ Blue Lab Phase 1 currently uses the **Wazuh manager** component on `wazuh-server
 ### Notes
 - The manager component is installed and active on the Ubuntu server.
 - The present lab state is sufficient to support monitored endpoint enrollment in Phase 1.
+
+### Event Visibility / Validation Notes
+- During Phase 2A monitoring validation, raw event visibility was enabled on the manager to support endpoint telemetry troubleshooting and analysis.
+- The Wazuh manager was configured to retain archive data so collected events could be reviewed even when they did not generate a higher-level alert.
+- Review of `archives.json` confirmed that Windows Event Channel data from `win-endpoint-01` was reaching the manager.
+- Initial archive validation showed that manager-side activity from `wazuh-server` itself could dominate terminal output during testing, which made raw archive review more useful than alert-only review for early telemetry validation.
+- Readability improved significantly when manager inspection was performed over SSH from the Windows host rather than through the limited Hyper-V console window.
+- `jq` was added on `wazuh-server` to make JSON archive output readable during telemetry validation and troubleshooting.
+
+### Preferred Validation Workflow
+- SSH into `wazuh-server` from the Windows host rather than using the small Hyper-V console window
+- Use manager-side archive review to inspect raw collected events from monitored endpoints
+- Use `jq` to filter and format archive output for readability
+- Use targeted test events that clearly create new processes or channel-specific activity when validating Windows telemetry
+
+### Example Validation Commands
+```bash
+sudo /var/ossec/bin/agent_control -l
+sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'
+sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | grep -a '"location":"EventChannel"' | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'
+sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | jq 'select(.location=="EventChannel") | .full_log |= fromjson | select(.full_log.win.system.eventID=="4688" or (.full_log.win.system.providerName | test("PowerShell"))) | {timestamp, agent: .agent.name, eventID: .full_log.win.system.eventID, provider: .full_log.win.system.providerName, channel: .full_log.win.system.channel, message: .full_log.win.system.message}'
 
 ---
 
