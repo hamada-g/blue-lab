@@ -273,6 +273,8 @@ Begin Phase 2A telemetry validation on the Windows endpoint and improve manager-
 - Began Windows telemetry baseline work on `win-endpoint-01`
 - Confirmed the `WazuhSvc` service was running
 - Confirmed `win-endpoint-01` remained connected on the Wazuh manager using `agent_control -l`
+- Identified that the endpoint was running Windows 11 Home, which meant Group Policy Editor was not available by default
+- Enabled Group Policy Editor manually through elevated Command Prompt using DISM package-addition commands before revisiting advanced audit policy configuration
 - Enabled Windows process creation auditing
 - Enabled command-line inclusion for process creation events
 - Enabled key logon, logoff, special logon, and account-management auditing categories
@@ -307,6 +309,7 @@ Begin Phase 2A telemetry validation on the Windows endpoint and improve manager-
 - JSON event output should be filtered and formatted for readability rather than reviewed directly in long raw terminal streams
 - Explicit process-launch tests are preferable to `Get-Process` when validating process creation visibility
 - Effective audit policy must be verified with `auditpol`, not assumed from Group Policy configuration alone
+- Windows edition details matter operationally and should be documented when they directly affect tooling availability or troubleshooting flow
 
 ### Problems Encountered
 - Raw `alerts.json` and `archives.json` output was difficult to read in the small Hyper-V console window
@@ -315,19 +318,22 @@ Begin Phase 2A telemetry validation on the Windows endpoint and improve manager-
 - Grep-based review of JSON output was technically functional but not comfortable for sustained manual inspection without additional formatting
 - The first process-related validation test did not cleanly isolate a process creation event in the sampled archive view, even though raw endpoint telemetry collection was confirmed
 - Intended policy settings in Local Group Policy did not initially match the effective `auditpol` state for process creation
+- Group Policy Editor was not available by default because the endpoint was running Windows 11 Home
 
 ### Important Commands Used
 - `Get-Service WazuhSvc`
 - `gpupdate /force`
 - `auditpol /get /subcategory:"Process Creation"`
 - `auditpol /set /subcategory:"Process Creation" /success:enable`
+- `FOR %F IN ("%SystemRoot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~*.mum") DO (DISM /Online /NoRestart /Add-Package:"%F")`
+- `FOR %F IN ("%SystemRoot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~*.mum") DO (DISM /Online /NoRestart /Add-Package:"%F")`
 - `sudo /var/ossec/bin/agent_control -l`
 - `sudo nano /var/ossec/etc/ossec.conf`
 - `sudo systemctl restart wazuh-manager`
 - `ssh blueadmin@10.10.10.10`
 - `sudo apt-get update && sudo apt-get install -y jq`
-- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | tail -n 10 | jq '{timestamp, agent: .agent.name, location: .location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'
-- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | grep -a '"location":"EventChannel"' | tail -n 10 | jq '{timestamp, agent: .agent.name, location: .location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'
+- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | tail -n 10 | jq '{timestamp, agent: .agent.name, location: .location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'`
+- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | grep -a '"location":"EventChannel"' | tail -n 10 | jq '{timestamp, agent: .agent.name, location: .location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'`
 - `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | jq 'select(.location=="EventChannel") | .full_log |= fromjson | select(.full_log.win.system.eventID=="4688" or (.full_log.win.system.providerName | test("PowerShell"))) | {timestamp, agent: .agent.name, eventID: .full_log.win.system.eventID, provider: .full_log.win.system.providerName, channel: .full_log.win.system.channel, message: .full_log.win.system.message}'`
 - `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | jq 'select(.location=="EventChannel") | .full_log |= fromjson | select(.full_log.win.system.eventID=="4688") | {timestamp, agent: .agent.name, eventID: .full_log.win.system.eventID, provider: .full_log.win.system.providerName, channel: .full_log.win.system.channel, message: .full_log.win.system.message}'`
 
