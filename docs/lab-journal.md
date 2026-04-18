@@ -263,3 +263,54 @@ Complete the Linux endpoint build and finish the blue-lab core with three active
 
 ### Next Step
 Stabilize and tidy the final blue-lab documentation, then begin designing the red-lab extension using the current environment as the defensive baseline.
+
+## 2026-04-17
+
+### Objective
+Begin Phase 2A telemetry validation on the Windows endpoint and improve manager-side event visibility for readable monitoring checks.
+
+### Actions Taken
+- Began Windows telemetry baseline work on `win-endpoint-01`
+- Confirmed the `WazuhSvc` service was running
+- Confirmed `win-endpoint-01` remained connected on the Wazuh manager using `agent_control -l`
+- Enabled Windows process creation auditing
+- Enabled command-line inclusion for process creation events
+- Enabled key logon, logoff, special logon, and account-management auditing categories
+- Enabled PowerShell module logging and script block logging
+- Added `*`, `Microsoft.PowerShell.*`, and `Microsoft.WSMan.Management` to module logging configuration
+- Confirmed Task Scheduler Operational logging
+- Confirmed Windows Defender Operational logging
+- Generated initial benign test activity from the Windows endpoint
+- Enabled Wazuh archive logging on the manager to support raw event review during telemetry validation
+- Restarted `wazuh-manager` after archive logging changes
+- Confirmed that events from `win-endpoint-01` were reaching manager-side archive data
+- Observed that manager-side activity from `wazuh-server` could dominate terminal output during testing and make alert-only review less useful
+- Determined that SSH access from the Windows host to `wazuh-server` was preferable to using the limited Hyper-V console for archive review
+- Switched to a host-side SSH workflow for manager inspection
+- Selected `jq` as the preferred tool to make JSON archive output readable during validation
+
+### Decisions Made
+- Phase 2A should focus first on Windows telemetry validation before moving to Linux baseline work
+- Raw archive review is more useful than alert-only review during early telemetry validation
+- Manager inspection should be performed over SSH from the Windows host when practical
+- JSON event output should be filtered and formatted for readability rather than reviewed directly in long raw terminal streams
+
+### Problems Encountered
+- Raw `alerts.json` and `archives.json` output was difficult to read in the small Hyper-V console window
+- Manager-side `sudo` and other local activity on `wazuh-server` appeared prominently during testing and made quick visual review noisy
+- Initial SSH access was attempted from the Windows endpoint instead of the Windows host, which was less useful for managing terminal space and workflow
+- Grep-based review of JSON output was technically functional but not comfortable for sustained manual inspection without additional formatting
+
+### Important Commands Used
+- `Get-Service WazuhSvc`
+- `gpupdate /force`
+- `sudo /var/ossec/bin/agent_control -l`
+- `sudo nano /var/ossec/etc/ossec.conf`
+- `sudo systemctl restart wazuh-manager`
+- `ssh blueadmin@10.10.10.10`
+- `sudo apt-get update && sudo apt-get install -y jq`
+- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'`
+- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | grep -a '"location":"EventChannel"' | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'`
+
+### Next Step
+Continue Phase 2A by validating specific Windows telemetry categories in a cleaner workflow, then document which events are visible, noisy, or still missing before moving on to Linux telemetry baseline work.
