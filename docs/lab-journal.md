@@ -288,18 +288,26 @@ Begin Phase 2A telemetry validation on the Windows endpoint and improve manager-
 - Determined that SSH access from the Windows host to `wazuh-server` was preferable to using the limited Hyper-V console for archive review
 - Switched to a host-side SSH workflow for manager inspection
 - Selected `jq` as the preferred tool to make JSON archive output readable during validation
+- Validated readable archive output from `win-endpoint-01` using host-side SSH and `jq`
+- Confirmed archive collection of Windows Security and System channel events from the endpoint
+- Observed sample Security event `5379` entries related to Credential Manager reads
+- Observed sample System event `7040` for a service startup type change, which mapped to a Wazuh rule
+- Observed sample Windows Update Client event `19` showing successful update installation
+- Determined that the initial `Get-Process | Select-Object -First 5` test did not produce a clean, isolated process-creation validation in the sampled output
 
 ### Decisions Made
 - Phase 2A should focus first on Windows telemetry validation before moving to Linux baseline work
 - Raw archive review is more useful than alert-only review during early telemetry validation
 - Manager inspection should be performed over SSH from the Windows host when practical
 - JSON event output should be filtered and formatted for readability rather than reviewed directly in long raw terminal streams
+- Explicit process-launch tests are preferable to `Get-Process` when validating process creation visibility
 
 ### Problems Encountered
 - Raw `alerts.json` and `archives.json` output was difficult to read in the small Hyper-V console window
 - Manager-side `sudo` and other local activity on `wazuh-server` appeared prominently during testing and made quick visual review noisy
 - Initial SSH access was attempted from the Windows endpoint instead of the Windows host, which was less useful for managing terminal space and workflow
 - Grep-based review of JSON output was technically functional but not comfortable for sustained manual inspection without additional formatting
+- The first process-related validation test did not cleanly isolate a process creation event in the sampled archive view, even though raw endpoint telemetry collection was confirmed
 
 ### Important Commands Used
 - `Get-Service WazuhSvc`
@@ -311,6 +319,7 @@ Begin Phase 2A telemetry validation on the Windows endpoint and improve manager-
 - `sudo apt-get update && sudo apt-get install -y jq`
 - `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'`
 - `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | grep -a '"location":"EventChannel"' | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'`
+- `sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | jq 'select(.location=="EventChannel") | .full_log |= fromjson | select(.full_log.win.system.eventID=="4688" or (.full_log.win.system.providerName | test("PowerShell"))) | {timestamp, agent: .agent.name, eventID: .full_log.win.system.eventID, provider: .full_log.win.system.providerName, channel: .full_log.win.system.channel, message: .full_log.win.system.message}'`
 
 ### Next Step
-Continue Phase 2A by validating specific Windows telemetry categories in a cleaner workflow, then document which events are visible, noisy, or still missing before moving on to Linux telemetry baseline work.
+Continue Phase 2A by generating more explicit Windows process and PowerShell test activity, then confirm whether those events are visible and distinguishable in archive review before moving on to Linux telemetry baseline work.
