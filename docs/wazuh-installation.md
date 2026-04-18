@@ -52,15 +52,6 @@ Blue Lab Phase 1 currently uses the **Wazuh manager** component on `wazuh-server
 - Use `jq` to filter and format archive output for readability
 - Use targeted test events that clearly create new processes or channel-specific activity when validating Windows telemetry
 
-### Example Validation Commands
-```bash
-sudo /var/ossec/bin/agent_control -l
-sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'
-sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | grep -a '"location":"EventChannel"' | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'
-sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | jq 'select(.location=="EventChannel") | .full_log |= fromjson | select(.full_log.win.system.eventID=="4688" or (.full_log.win.system.providerName | test("PowerShell"))) | {timestamp, agent: .agent.name, eventID: .full_log.win.system.eventID, provider: .full_log.win.system.providerName, channel: .full_log.win.system.channel, message: .full_log.win.system.message}'
-
----
-
 ## win-endpoint-01 Agent Installation
 
 ### Installation Summary
@@ -106,3 +97,13 @@ sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json |
 ### Notes
 - The initial manual package-download approach was abandoned in favor of the official repo-based deployment method from Wazuh documentation.
 - The Linux endpoint is the second monitored agent enrolled into the Blue Lab Wazuh manager.
+
+---
+
+### Example Validation Commands
+```bash
+sudo /var/ossec/bin/agent_control -l
+sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'
+sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | grep -a '"location":"EventChannel"' | tail -n 10 | jq '{timestamp, agent: .agent.name, location, decoder: .decoder.name, rule: (.rule.description // "no rule"), full_log}'
+sudo grep -a '"name":"win-endpoint-01"' /var/ossec/logs/archives/archives.json | jq 'select(.location=="EventChannel") | .full_log |= fromjson | select(.full_log.win.system.eventID=="4688" or (.full_log.win.system.providerName | test("PowerShell"))) | {timestamp, agent: .agent.name, eventID: .full_log.win.system.eventID, provider: .full_log.win.system.providerName, channel: .full_log.win.system.channel, message: .full_log.win.system.message}'
+
